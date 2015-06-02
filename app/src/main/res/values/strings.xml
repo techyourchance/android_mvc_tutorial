@@ -2,4 +2,6 @@
     <string name="app_name">Android_MVC_Template</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="txt_sms_address_heading">From:</string>
+    <string name="txt_sms_date_heading">Date:</string>
 </resources>

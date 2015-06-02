@@ -34,6 +34,7 @@ public class HomeFragmentListAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         SmsMessage smsMessage;
 
+        // Create SmsMessage object
         try {
             smsMessage = SmsMessage.createSmsMessage(cursor);
         } catch (IllegalArgumentException e) {
@@ -42,6 +43,7 @@ public class HomeFragmentListAdapter extends CursorAdapter {
             return;
         }
 
+        // Order the MVC View to update itself
         ((SmsThumbnailViewMVC) view).showSmsThumbnail(smsMessage);
     }
 

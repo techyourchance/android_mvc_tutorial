@@ -2,6 +2,7 @@ package com.techyourchance.www.android_mvc_template.controllers.fragments;
 
 import android.app.Fragment;
 import android.app.LoaderManager;
+import android.content.ContentUris;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
@@ -11,62 +12,43 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
-import com.techyourchance.www.android_mvc_template.R;
-import com.techyourchance.www.android_mvc_template.controllers.listadapters.HomeFragmentListAdapter;
-import com.techyourchance.www.android_mvc_template.views.HomeFragmentViewMVC;
-
+import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
+import com.techyourchance.www.android_mvc_template.views.SmsDetailsFragmentViewMVC;
 
 /**
- * A Fragment containing a list of phone's contacts
+ * This fragment is used to show the details of a SMS message and mark it as read
  */
-public class HomeFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class SmsDetailsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>  {
 
-    private static final String LOG_TAG = HomeFragment.class.getSimpleName();
+    private static final String LOG_TAG = SmsDetailsFragment.class.getSimpleName();
 
     // ID for a loader employed in this controller
     private static final int SMS_LOADER = 0;
 
-    HomeFragmentViewMVC mViewMVC;
+    /**
+     * This constant should be used as a key in a Bundle passed to this fragment as an argument
+     * at creation time. This key should correspond to the ID of the particular SMS message
+     * which details will be shown in this fragment
+     */
+    public static final String ARG_SMS_MESSAGE_ID = "arg_sms_message_id";
 
-    HomeFragmentListAdapter mAdapter;
+
+    private SmsDetailsFragmentViewMVC mViewMVC;
+
+    private long mSmsMessageId;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                        a     Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
 
         // Instantiate MVC view associated with this fragment
-        mViewMVC = new HomeFragmentViewMVC(inflater, container);
+        mViewMVC = new SmsDetailsFragmentViewMVC(inflater, container);
 
-        // Perform all initializations related to the ListView
-        initializeList();
 
         // Return the root view of the associated MVC view
         return mViewMVC.getRootView();
-    }
-
-
-    private void initializeList() {
-        /*
-         Note that we are passing null instead of a Cursor - the actual Cursor with the
-         results will be passed to this adapter after LoaderManager framework will call
-         onLoadFinished() callback method.
-          */
-
-        mAdapter = new HomeFragmentListAdapter(getActivity(), null, 0);
-
-        /*
-         MVC Controller is allowed to be exposed to the implementation details of MVC view.
-         In this case, we made this MVC controller dependent upon existence of a particular
-         ListView in the corresponding MVC view, which is acceptable tradeof.
-         */
-        ((ListView)mViewMVC.getRootView().findViewById(R.id.list_sms_messages)).setAdapter(mAdapter);
-
-
-        // This line of code initializes the LoaderManager framework and instructs it "manage"
-        // a Loader (in our case - CursorLoader) with the specified ID (SMS_LOADER)
-        getLoaderManager().initLoader(SMS_LOADER, null, this);
     }
 
 
@@ -87,7 +69,8 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
 
         if (id == SMS_LOADER) {
 
-            Uri contentUri = Uri.parse("content://sms/inbox");
+            Uri contentUri = ContentUris.withAppendedId(
+                    Uri.parse("content://sms/inbox"), mSmsMessageId);
 
             // The "data columns" used in our app
             String[] projection = new String[] {
@@ -124,8 +107,26 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         if (loader.getId() == SMS_LOADER) {
-            // When the load is finished - pass the Cursor with the results to our CursorAdapter
-            mAdapter.swapCursor(cursor);
+
+            if (cursor.moveToFirst()) {
+
+                SmsMessage smsMessage;
+
+                // Create SmsMessage object
+                try {
+                    smsMessage = SmsMessage.createSmsMessage(cursor);
+                } catch (IllegalArgumentException e) {
+                    Log.e(LOG_TAG, "Couldn't create SmsMessage from the provided Cursor...");
+                    e.printStackTrace();
+                    return;
+                }
+
+                // Order the MVC view to update itself
+                mViewMVC.showSmsDetails(smsMessage);
+
+            } else {
+                Log.e(LOG_TAG, "the Cursor provided to onLoadFinished() is empty");
+            }
         } else {
             Log.e(LOG_TAG, "onLoadFinished() called with unrecognized loader id: " + loader.getId());
         }
@@ -134,8 +135,7 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         if (loader.getId() == SMS_LOADER) {
-            // Releasing the resources
-            mAdapter.swapCursor(null);
+            // Nothing to do here
         } else {
             Log.e(LOG_TAG, "onLoaderReset() called with unrecognized loader id: " + loader.getId());
         }
@@ -146,7 +146,6 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
     // End of LoaderCallback methods
     //
     // ---------------------------------------------------------------------------------------------
-
 
 
 }
