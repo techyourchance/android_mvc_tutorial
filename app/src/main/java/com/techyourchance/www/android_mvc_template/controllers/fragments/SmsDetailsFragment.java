@@ -3,6 +3,7 @@ package com.techyourchance.www.android_mvc_template.controllers.fragments;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
@@ -15,6 +16,8 @@ import android.view.ViewGroup;
 
 import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
 import com.techyourchance.www.android_mvc_template.views.SmsDetailsFragmentViewMVC;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * This fragment is used to show the details of a SMS message and mark it as read
@@ -38,6 +41,7 @@ public class SmsDetailsFragment extends Fragment implements LoaderManager.Loader
 
     private long mSmsMessageId;
 
+    private EventBus mEventBus = EventBus.getDefault();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,8 +51,72 @@ public class SmsDetailsFragment extends Fragment implements LoaderManager.Loader
         mViewMVC = new SmsDetailsFragmentViewMVC(inflater, container);
 
 
+        // Get the argument of this fragment and look for the ID of the SMS message which should
+        // be shown
+        Bundle args = getArguments();
+        if (args.containsKey(ARG_SMS_MESSAGE_ID)) {
+            // Get the ID and init the LoaderManager
+            mSmsMessageId = args.getLong(ARG_SMS_MESSAGE_ID);
+            getLoaderManager().initLoader(SMS_LOADER, null, this);
+        } else {
+            // If no ID was provided in the arguments then LoaderManager will not be initiated,
+            // and as a result of this - no data will be shown in this fragment
+            Log.e(LOG_TAG, "no SMS message ID was passed in arguments");
+        }
+
         // Return the root view of the associated MVC view
         return mViewMVC.getRootView();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Register this fragment as a subscriber on EventBus
+        mEventBus.register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // Unregister this fragment from EventBus
+        mEventBus.unregister(this);
+    }
+
+    /**
+     * This method will be called by EventBus framework when events of type
+     * {@link SmsDetailsFragmentViewMVC.ButtonMarkReadClickEvent} will be published.
+     * @param event the event that was published on the bus
+     */
+    public void onEvent(SmsDetailsFragmentViewMVC.ButtonMarkReadClickEvent event) {
+
+        /*
+         onEvent() methods should return as quickly as possible in order not to delay notification
+         of other subscribers on EventBus.
+
+         Since marking the SMS message as read involves communication with "outer" ContentProvider,
+         we will do it on a separate thread.
+          */
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                markRead();
+            }
+        }).start();
+    }
+
+    /**
+     * Mark the SMS message as read
+     */
+    private void markRead() {
+        // Uri of a particular SMS message
+        Uri smsMessageUri = ContentUris.withAppendedId(
+                Uri.parse("content://sms/inbox"), mSmsMessageId);
+
+        // Designating the fields that should be updated
+        ContentValues values = new ContentValues();
+        values.put("read", true);
+
+        getActivity().getContentResolver().update(smsMessageUri, values, null, null);
     }
 
 
@@ -58,7 +126,7 @@ public class SmsDetailsFragment extends Fragment implements LoaderManager.Loader
 
     /*
      MVC model of the app is the database of SMS messages stored on the device. The model
-     is accessed via standard ContentProvider supplied as part of Android (starting API 19).
+     is accessed via a non-standard ContentProvider having CONTENT_URI "content://sms/inbox"
      In order to fetch data from ContentProvider we will use CursorLoader passed into LoaderManager
      framework.
      The below methods are callbacks executed by the LoaderManager framework.

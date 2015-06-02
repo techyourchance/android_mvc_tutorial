@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.techyourchance.www.android_mvc_template.R;
 import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
 
+import de.greenrobot.event.EventBus;
+
 /**
  * This MVC view contains a list view and intercepts click events
  */
@@ -33,7 +35,10 @@ public class SmsDetailsFragmentViewMVC implements ViewMVC {
         mBtnMarkRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: add messaging to the controller
+                // Get EventBus instance
+                EventBus eventBus = EventBus.getDefault();
+                // Post a click event to EventBus
+                eventBus.post(new ButtonMarkReadClickEvent());
             }
         });
     }
@@ -68,5 +73,12 @@ public class SmsDetailsFragmentViewMVC implements ViewMVC {
     @Override
     public Bundle getViewState() {
         return null;
+    }
+
+    /**
+     * This nested static class represents a button click event that will be posted on EventBus.
+     */
+    public static class ButtonMarkReadClickEvent {
+        public ButtonMarkReadClickEvent() {}
     }
 }

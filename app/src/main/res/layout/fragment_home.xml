@@ -4,6 +4,5 @@
     android:id="@+id/list_sms_messages"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="none"
     android:divider="@android:color/transparent"
     android:dividerHeight="10.0dp"/>

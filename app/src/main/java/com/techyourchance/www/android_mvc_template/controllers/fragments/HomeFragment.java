@@ -14,8 +14,11 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.techyourchance.www.android_mvc_template.R;
+import com.techyourchance.www.android_mvc_template.controllers.activities.MainActivity;
 import com.techyourchance.www.android_mvc_template.controllers.listadapters.HomeFragmentListAdapter;
 import com.techyourchance.www.android_mvc_template.views.HomeFragmentViewMVC;
+
+import de.greenrobot.event.EventBus;
 
 
 /**
@@ -32,9 +35,11 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
 
     HomeFragmentListAdapter mAdapter;
 
+    EventBus mEventBus = EventBus.getDefault();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                        a     Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
 
         // Instantiate MVC view associated with this fragment
         mViewMVC = new HomeFragmentViewMVC(inflater, container);
@@ -69,6 +74,35 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
         getLoaderManager().initLoader(SMS_LOADER, null, this);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Register this fragment as a subscriber on EventBus
+        mEventBus.register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // Unregister this fragment from the EventBus
+        mEventBus.unregister(this);
+    }
+
+
+    /**
+     * This method will be called by EventBus framework when events of type
+     * {@link HomeFragmentViewMVC.ListItemClickEvent} will be published.
+     * @param event the event that was published on the bus
+     */
+    public void onEvent(HomeFragmentViewMVC.ListItemClickEvent event) {
+
+        // Create a bundle that will pass the ID of the clicked SMS message to the new fragment
+        Bundle args = new Bundle(1);
+        args.putLong(SmsDetailsFragment.ARG_SMS_MESSAGE_ID, event.mId);
+
+        // Replace this fragment with a new one and pass args to it
+        ((MainActivity)getActivity()).replaceFragment(SmsDetailsFragment.class, true, args);
+    }
 
     // ---------------------------------------------------------------------------------------------
     //
@@ -76,7 +110,7 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
 
     /*
      MVC model of the app is the database of SMS messages stored on the device. The model
-     is accessed via standard ContentProvider supplied as part of Android (starting API 19).
+     is accessed via a non-standard ContentProvider having CONTENT_URI "content://sms/inbox"
      In order to fetch data from ContentProvider we will use CursorLoader passed into LoaderManager
      framework.
      The below methods are callbacks executed by the LoaderManager framework.

@@ -21,6 +21,12 @@ public class SmsMessage {
     private SmsMessage() {}
 
 
+    /**
+     * Factory method that constructs SmsMessage object from the values stored in Cursor at the
+     * current position.
+     * @throws IllegalArgumentException if any of the required fields are missing from Cursor.
+     * Required fields: "address", "body", "date", "read".
+     */
     public static SmsMessage createSmsMessage(Cursor cursor) throws IllegalArgumentException {
         SmsMessage smsMessage = new SmsMessage();
 
@@ -34,8 +40,7 @@ public class SmsMessage {
             smsMessage.mDate = cursor.getString(
                     cursor.getColumnIndexOrThrow("date"));
 
-            smsMessage.mUnread = Integer.valueOf(cursor.getString(
-                    cursor.getColumnIndexOrThrow("read"))) == 0;
+            smsMessage.mUnread = cursor.getInt(cursor.getColumnIndexOrThrow("read")) == 0;
 
         } catch (Exception e) {
             throw new IllegalArgumentException(e);

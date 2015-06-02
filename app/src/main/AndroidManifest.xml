@@ -3,6 +3,7 @@
     package="com.techyourchance.www.android_mvc_template" >
 
     <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.WRITE_SMS"/>
 
     <application
         android:allowBackup="true"
