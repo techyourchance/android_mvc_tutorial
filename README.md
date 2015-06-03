@@ -18,4 +18,4 @@ GreenRobot's [EventBus library](https://github.com/greenrobot/EventBus) is used 
 
 # License
 
-Android_MVC_Template binaries and source code can be used according to the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+android_mvc_template binaries and source code can be used according to the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
