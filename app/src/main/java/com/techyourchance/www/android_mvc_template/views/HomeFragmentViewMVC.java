@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.techyourchance.www.android_mvc_template.R;
@@ -50,6 +51,15 @@ public class HomeFragmentViewMVC implements ViewMVC {
     @Override
     public Bundle getViewState() {
         return null;
+    }
+
+
+    /**
+     * Set the adapter for the ListView found in this MVC view
+     * @param adapter an adapter to use for the underlying ListView
+     */
+    public void setListAdapter(ListAdapter adapter) {
+        mListView.setAdapter(adapter);
     }
 
 

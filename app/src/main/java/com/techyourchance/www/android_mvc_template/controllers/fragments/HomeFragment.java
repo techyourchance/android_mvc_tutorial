@@ -58,18 +58,12 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
          results will be passed to this adapter after LoaderManager framework will call
          onLoadFinished() callback method.
           */
-
         mAdapter = new HomeFragmentListAdapter(getActivity(), null, 0);
 
-        /*
-         MVC Controller is allowed to be exposed to the implementation details of MVC view.
-         In this case, we made this MVC controller dependent upon existence of a particular
-         ListView in the corresponding MVC view, which is acceptable tradeof.
-         */
-        ((ListView)mViewMVC.getRootView().findViewById(R.id.list_sms_messages)).setAdapter(mAdapter);
+        // Pass the adapter to the MVC view
+        mViewMVC.setListAdapter(mAdapter);
 
-
-        // This line of code initializes the LoaderManager framework and instructs it "manage"
+        // This line of code initializes the LoaderManager framework and instructs it to "manage"
         // a Loader (in our case - CursorLoader) with the specified ID (SMS_LOADER)
         getLoaderManager().initLoader(SMS_LOADER, null, this);
     }
