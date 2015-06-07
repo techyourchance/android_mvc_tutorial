@@ -8,11 +8,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.techyourchance.www.android_mvc_template.R;
+import com.techyourchance.www.android_mvc_template.controllers.fragments.AbstractFragment;
 import com.techyourchance.www.android_mvc_template.controllers.fragments.HomeFragment;
 import com.techyourchance.www.android_mvc_template.views.MainActivityViewMVC;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements AbstractFragment.AbstractFragmentCallback{
 
     MainActivityViewMVC mViewMVC;
 
@@ -48,13 +49,7 @@ public class MainActivity extends Activity {
     //
     // Fragments management
 
-    /**
-     * This method replaces the currently shown fragment with a new fragment of a particular class.
-     * If a fragment of the required class already shown - does nothing.
-     * @param claz the class of the fragment to show
-     * @param addToBackStack whether the replacement should be added to back-stack
-     * @param args arguments for the newly created fragment (can be null)
-     */
+    @Override
     public void replaceFragment(Class<? extends Fragment> claz, boolean addToBackStack,
                                 Bundle args) {
 
@@ -101,8 +96,8 @@ public class MainActivity extends Activity {
         Fragment currFragment = getFragmentManager().findFragmentById(R.id.frame_contents);
 
 
-        return (currFragment == null && claz == null) || (
-                currFragment != null && claz.isInstance(currFragment));
+        return (currFragment == null && claz == null) ||
+                (currFragment != null && claz.isInstance(currFragment));
     }
 
     // End of fragments management

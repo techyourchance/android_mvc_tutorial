@@ -22,7 +22,7 @@ import de.greenrobot.event.EventBus;
 /**
  * This fragment is used to show the details of a SMS message and mark it as read
  */
-public class SmsDetailsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>  {
+public class SmsDetailsFragment extends AbstractFragment implements LoaderManager.LoaderCallbacks<Cursor>  {
 
     private static final String LOG_TAG = SmsDetailsFragment.class.getSimpleName();
 

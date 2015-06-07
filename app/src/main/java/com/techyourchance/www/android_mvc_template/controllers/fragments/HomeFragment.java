@@ -24,7 +24,7 @@ import de.greenrobot.event.EventBus;
 /**
  * A Fragment containing a list of phone's contacts
  */
-public class HomeFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class HomeFragment extends AbstractFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String LOG_TAG = HomeFragment.class.getSimpleName();
 
@@ -95,7 +95,7 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
         args.putLong(SmsDetailsFragment.ARG_SMS_MESSAGE_ID, event.mId);
 
         // Replace this fragment with a new one and pass args to it
-        ((MainActivity)getActivity()).replaceFragment(SmsDetailsFragment.class, true, args);
+        replaceFragment(SmsDetailsFragment.class, true, args);
     }
 
     // ---------------------------------------------------------------------------------------------
