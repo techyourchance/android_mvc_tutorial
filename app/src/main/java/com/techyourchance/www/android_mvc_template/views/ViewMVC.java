@@ -23,7 +23,11 @@ public interface ViewMVC {
 
     /**
      * This method aggregates all the information about the state of this MVC View into Bundle
-     * object.
+     * object. The keys in the returned Bundle must be provided as public constants inside the
+     * implementations of concrete MVC views.<br>
+     * The main use case for this method is exporting the state of editable Android Views underlying
+     * the MVC view. This information can be used by MVC controller for e.g. processing user's
+     * input or saving view's state during lifecycle events.
      * @return Bundle containing the state of this MVC View, or null if the view has no state
      */
     public Bundle getViewState();
