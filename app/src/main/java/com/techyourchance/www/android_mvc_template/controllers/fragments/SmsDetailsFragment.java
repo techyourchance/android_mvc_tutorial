@@ -24,10 +24,7 @@ import de.greenrobot.event.EventBus;
  */
 public class SmsDetailsFragment extends AbstractFragment implements LoaderManager.LoaderCallbacks<Cursor>  {
 
-    private static final String LOG_TAG = SmsDetailsFragment.class.getSimpleName();
-
-    // ID for a loader employed in this controller
-    private static final int SMS_LOADER = 0;
+    private static final String LOG_TAG = "SmsDetailsFragment";
 
     /**
      * This constant should be used as a key in a Bundle passed to this fragment as an argument
@@ -36,12 +33,12 @@ public class SmsDetailsFragment extends AbstractFragment implements LoaderManage
      */
     public static final String ARG_SMS_MESSAGE_ID = "arg_sms_message_id";
 
+    // ID for a loader employed in this controller
+    private static final int SMS_LOADER = 0;
 
     private SmsDetailsFragmentViewMVC mViewMVC;
 
     private long mSmsMessageId;
-
-    private EventBus mEventBus = EventBus.getDefault();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,14 +69,14 @@ public class SmsDetailsFragment extends AbstractFragment implements LoaderManage
     public void onResume() {
         super.onResume();
         // Register this fragment as a subscriber on EventBus
-        mEventBus.register(this);
+        EventBus.getDefault().register(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
         // Unregister this fragment from EventBus
-        mEventBus.unregister(this);
+        EventBus.getDefault().unregister(this);
     }
 
     /**
@@ -93,7 +90,7 @@ public class SmsDetailsFragment extends AbstractFragment implements LoaderManage
          onEvent() methods should return as quickly as possible in order not to delay notification
          of other subscribers on EventBus.
 
-         Since marking the SMS message as read involves communication with "outer" ContentProvider,
+         Since marking the SMS message as read involves communication with ContentProvider,
          we will do it on a separate thread.
           */
         new Thread(new Runnable() {

@@ -13,7 +13,7 @@ import com.techyourchance.www.android_mvc_template.controllers.fragments.HomeFra
 import com.techyourchance.www.android_mvc_template.views.MainActivityViewMVC;
 
 
-public class MainActivity extends Activity implements AbstractFragment.AbstractFragmentCallback{
+public class MainActivity extends Activity implements AbstractFragment.AbstractFragmentCallback {
 
     MainActivityViewMVC mViewMVC;
 

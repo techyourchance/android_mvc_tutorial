@@ -17,7 +17,7 @@ import com.techyourchance.www.android_mvc_template.views.SmsThumbnailViewMVC;
 public class HomeFragmentListAdapter extends CursorAdapter {
 
 
-    private final static String LOG_TAG = HomeFragmentListAdapter.class.getSimpleName();
+    private final static String LOG_TAG = "HomeFragmentListAdapter";
 
 
     public HomeFragmentListAdapter(Context context, Cursor cursor, int flags) {

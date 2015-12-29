@@ -26,7 +26,7 @@ import de.greenrobot.event.EventBus;
  */
 public class HomeFragment extends AbstractFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private static final String LOG_TAG = HomeFragment.class.getSimpleName();
+    private static final String LOG_TAG = "HomeFragment";
 
     // ID for a loader employed in this controller
     private static final int SMS_LOADER = 0;
