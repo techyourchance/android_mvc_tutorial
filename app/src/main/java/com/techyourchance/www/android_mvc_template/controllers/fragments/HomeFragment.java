@@ -1,6 +1,5 @@
 package com.techyourchance.www.android_mvc_template.controllers.fragments;
 
-import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
@@ -11,12 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
-import com.techyourchance.www.android_mvc_template.R;
-import com.techyourchance.www.android_mvc_template.controllers.activities.MainActivity;
 import com.techyourchance.www.android_mvc_template.controllers.listadapters.HomeFragmentListAdapter;
-import com.techyourchance.www.android_mvc_template.views.HomeFragmentViewMVC;
+import com.techyourchance.www.android_mvc_template.views.HomeViewMVC;
 
 import de.greenrobot.event.EventBus;
 
@@ -31,7 +27,7 @@ public class HomeFragment extends AbstractFragment implements LoaderManager.Load
     // ID for a loader employed in this controller
     private static final int SMS_LOADER = 0;
 
-    HomeFragmentViewMVC mViewMVC;
+    HomeViewMVC mViewMVC;
 
     HomeFragmentListAdapter mAdapter;
 
@@ -42,7 +38,7 @@ public class HomeFragment extends AbstractFragment implements LoaderManager.Load
                              Bundle savedInstanceState) {
 
         // Instantiate MVC view associated with this fragment
-        mViewMVC = new HomeFragmentViewMVC(inflater, container);
+        mViewMVC = new HomeViewMVC(inflater, container);
 
         // Perform all initializations related to the ListView
         initializeList();
@@ -85,10 +81,10 @@ public class HomeFragment extends AbstractFragment implements LoaderManager.Load
 
     /**
      * This method will be called by EventBus framework when events of type
-     * {@link HomeFragmentViewMVC.ListItemClickEvent} will be published.
+     * {@link HomeViewMVC.ListItemClickEvent} will be published.
      * @param event the event that was published on the bus
      */
-    public void onEvent(HomeFragmentViewMVC.ListItemClickEvent event) {
+    public void onEvent(HomeViewMVC.ListItemClickEvent event) {
 
         // Create a bundle that will pass the ID of the clicked SMS message to the new fragment
         Bundle args = new Bundle(1);

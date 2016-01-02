@@ -9,15 +9,14 @@ import android.view.ViewGroup;
 import com.techyourchance.www.android_mvc_template.R;
 
 /**
- * This is the MVC view associated with MainActivity MVC controller. In fact, since this view
- * is extremely simple, its existence might even be unjustified...
+ * Very simple MVC view containing just single FrameLayout
  */
-public class MainActivityViewMVC implements ViewMVC{
+public class FrameLayoutViewMVC implements ViewMVC {
 
     private View mRootView;
 
-    public MainActivityViewMVC(Context context, ViewGroup container) {
-        mRootView = LayoutInflater.from(context).inflate(R.layout.activity_main, container);
+    public FrameLayoutViewMVC(Context context, ViewGroup container) {
+        mRootView = LayoutInflater.from(context).inflate(R.layout.mvc_view_frame_layout, container);
     }
 
     @Override

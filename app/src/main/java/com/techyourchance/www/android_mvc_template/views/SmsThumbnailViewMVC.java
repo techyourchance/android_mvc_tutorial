@@ -35,7 +35,7 @@ public class SmsThumbnailViewMVC extends LinearLayout implements ViewMVC {
          Note: since this class extends LinearLayout, the inflated xml file can have <merge> tags
          enclosing it.
         */
-        LayoutInflater.from(context).inflate(R.layout.layout_sms_thumbnail, this, true);
+        LayoutInflater.from(context).inflate(R.layout.mvc_view_sms_thumbnail, this, true);
 
 
         initialize();

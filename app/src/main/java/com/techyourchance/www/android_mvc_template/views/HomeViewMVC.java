@@ -15,15 +15,15 @@ import de.greenrobot.event.EventBus;
 /**
  * This MVC view contains a list view and intercepts click events
  */
-public class HomeFragmentViewMVC implements ViewMVC {
+public class HomeViewMVC implements ViewMVC {
 
 
     View mRootView;
 
     ListView mListView;
 
-    public HomeFragmentViewMVC(LayoutInflater inflater, ViewGroup container) {
-        mRootView = inflater.inflate(R.layout.fragment_home, container, false);
+    public HomeViewMVC(LayoutInflater inflater, ViewGroup container) {
+        mRootView = inflater.inflate(R.layout.mvc_view_home, container, false);
 
         mListView = (ListView) mRootView.findViewById(R.id.list_sms_messages);
 

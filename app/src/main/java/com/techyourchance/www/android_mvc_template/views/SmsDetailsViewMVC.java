@@ -4,9 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.techyourchance.www.android_mvc_template.R;
@@ -17,7 +15,7 @@ import de.greenrobot.event.EventBus;
 /**
  * This MVC view contains a list view and intercepts click events
  */
-public class SmsDetailsFragmentViewMVC implements ViewMVC {
+public class SmsDetailsViewMVC implements ViewMVC {
 
 
     View mRootView;
@@ -27,8 +25,8 @@ public class SmsDetailsFragmentViewMVC implements ViewMVC {
     TextView mTxtBody;
     Button mBtnMarkRead;
 
-    public SmsDetailsFragmentViewMVC(LayoutInflater inflater, ViewGroup container) {
-        mRootView = inflater.inflate(R.layout.fragment_sms_details, container, false);
+    public SmsDetailsViewMVC(LayoutInflater inflater, ViewGroup container) {
+        mRootView = inflater.inflate(R.layout.mvc_view_sms_details, container, false);
 
         initialize();
 

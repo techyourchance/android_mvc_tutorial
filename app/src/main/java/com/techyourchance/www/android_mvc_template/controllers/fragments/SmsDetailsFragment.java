@@ -1,6 +1,5 @@
 package com.techyourchance.www.android_mvc_template.controllers.fragments;
 
-import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -15,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
-import com.techyourchance.www.android_mvc_template.views.SmsDetailsFragmentViewMVC;
+import com.techyourchance.www.android_mvc_template.views.SmsDetailsViewMVC;
 
 import de.greenrobot.event.EventBus;
 
@@ -36,7 +35,7 @@ public class SmsDetailsFragment extends AbstractFragment implements LoaderManage
     // ID for a loader employed in this controller
     private static final int SMS_LOADER = 0;
 
-    private SmsDetailsFragmentViewMVC mViewMVC;
+    private SmsDetailsViewMVC mViewMVC;
 
     private long mSmsMessageId;
 
@@ -45,7 +44,7 @@ public class SmsDetailsFragment extends AbstractFragment implements LoaderManage
                              Bundle savedInstanceState) {
 
         // Instantiate MVC view associated with this fragment
-        mViewMVC = new SmsDetailsFragmentViewMVC(inflater, container);
+        mViewMVC = new SmsDetailsViewMVC(inflater, container);
 
 
         // Get the argument of this fragment and look for the ID of the SMS message which should
@@ -81,10 +80,10 @@ public class SmsDetailsFragment extends AbstractFragment implements LoaderManage
 
     /**
      * This method will be called by EventBus framework when events of type
-     * {@link SmsDetailsFragmentViewMVC.ButtonMarkReadClickEvent} will be published.
+     * {@link SmsDetailsViewMVC.ButtonMarkReadClickEvent} will be published.
      * @param event the event that was published on the bus
      */
-    public void onEvent(SmsDetailsFragmentViewMVC.ButtonMarkReadClickEvent event) {
+    public void onEvent(SmsDetailsViewMVC.ButtonMarkReadClickEvent event) {
 
         /*
          onEvent() methods should return as quickly as possible in order not to delay notification
