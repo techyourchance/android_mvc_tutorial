@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.techyourchance.www.android_mvc_template.controllers.listadapters.HomeFragmentListAdapter;
+import com.techyourchance.www.android_mvc_template.controllers.listadapters.HomeListAdapter;
 import com.techyourchance.www.android_mvc_template.views.HomeViewMVC;
 
 import de.greenrobot.event.EventBus;
@@ -29,7 +29,7 @@ public class HomeFragment extends AbstractFragment implements LoaderManager.Load
 
     HomeViewMVC mViewMVC;
 
-    HomeFragmentListAdapter mAdapter;
+    HomeListAdapter mAdapter;
 
     EventBus mEventBus = EventBus.getDefault();
 
@@ -54,7 +54,7 @@ public class HomeFragment extends AbstractFragment implements LoaderManager.Load
          results will be passed to this adapter after LoaderManager framework will call
          onLoadFinished() callback method.
           */
-        mAdapter = new HomeFragmentListAdapter(getActivity(), null, 0);
+        mAdapter = new HomeListAdapter(getActivity(), null, 0);
 
         // Pass the adapter to the MVC view
         mViewMVC.setListAdapter(mAdapter);

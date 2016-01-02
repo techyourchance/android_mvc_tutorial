@@ -14,13 +14,13 @@ import com.techyourchance.www.android_mvc_template.views.SmsThumbnailViewMVC;
  * This implementation of CursorAdapter is used for parsing Cursor's entries into SmsMessage
  * objects, and displaying their contents in ListView
  */
-public class HomeFragmentListAdapter extends CursorAdapter {
+public class HomeListAdapter extends CursorAdapter {
 
 
-    private final static String LOG_TAG = "HomeFragmentListAdapter";
+    private final static String LOG_TAG = "HomeListAdapter";
 
 
-    public HomeFragmentListAdapter(Context context, Cursor cursor, int flags) {
+    public HomeListAdapter(Context context, Cursor cursor, int flags) {
         super(context, cursor, flags);
     }
 
