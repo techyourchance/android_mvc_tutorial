@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.techyourchance.www.android_mvc_template.R;
+import com.techyourchance.www.android_mvc_template.Utils;
 import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
 
 import java.text.SimpleDateFormat;
@@ -51,7 +52,7 @@ public class SmsThumbnailViewMVC extends LinearLayout implements ViewMVC {
 
     public void showSmsThumbnail(SmsMessage smsMessage) {
         mTxtAddress.setText(smsMessage.mAddress);
-        mTxtDate.setText(convertToHumanReadableDate(smsMessage.mDate));
+        mTxtDate.setText(Utils.convertToHumanReadableDate(smsMessage.mDate));
 
         // Change the background depending on whether the message has already been read
         if (smsMessage.mUnread) {
@@ -59,14 +60,6 @@ public class SmsThumbnailViewMVC extends LinearLayout implements ViewMVC {
         } else {
             setBackgroundColor(getResources().getColor(android.R.color.white));
         }
-    }
-
-    /**
-     * Convert Unix timestamp to a human readable representation of date
-     */
-    private String convertToHumanReadableDate(String timestamp) {
-        SimpleDateFormat fmtOut = new SimpleDateFormat();
-        return fmtOut.format(new Date(Long.valueOf(timestamp)));
     }
 
     @Override
