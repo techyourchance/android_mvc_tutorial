@@ -4,6 +4,10 @@ This simple SMS inbox reader application demonstrates one of the possible approa
 
 You're invited to clone/fork this repository and use it as a template for your own great apps!
 
+# Detailed walkthrough
+
+I wrote a series of posts about this particular implementation of MVC for Android in a [blog](http://www.techyourchance.com/model-view-controller-mvc-and-model-view-presenter-mvp-architectural-patterns-in-android-part-1/). 
+
 # Fine print
 
 As a matter of fact, the architecture proposed is that of MVP rather than a pure MVC. 
