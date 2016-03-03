@@ -46,10 +46,11 @@
         android:layout_height="@dimen/space_height" />
 
     <Button
-        android:id="@+id/btn_mark_read"
+        android:id="@+id/btn_mark_as_read"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:visibility="gone"
         android:text="@string/btn_mark_read_text"/>
 
 </LinearLayout>

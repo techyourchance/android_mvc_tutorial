@@ -11,11 +11,11 @@ import com.techyourchance.www.android_mvc_template.R;
 /**
  * Very simple MVC view containing just single FrameLayout
  */
-public class FrameLayoutViewMVC implements ViewMVC {
+public class FrameLayoutViewMvcImpl implements ViewMVC {
 
     private View mRootView;
 
-    public FrameLayoutViewMVC(Context context, ViewGroup container) {
+    public FrameLayoutViewMvcImpl(Context context, ViewGroup container) {
         mRootView = LayoutInflater.from(context).inflate(R.layout.mvc_view_frame_layout, container);
     }
 

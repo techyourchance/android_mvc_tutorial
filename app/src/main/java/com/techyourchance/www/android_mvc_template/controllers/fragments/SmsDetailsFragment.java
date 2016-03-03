@@ -14,14 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
-import com.techyourchance.www.android_mvc_template.views.SmsDetailsViewMVC;
+import com.techyourchance.www.android_mvc_template.views.SmsDetailsViewMvc;
+import com.techyourchance.www.android_mvc_template.views.SmsDetailsViewMvcImpl;
 
 import de.greenrobot.event.EventBus;
 
 /**
  * This fragment is used to show the details of a SMS message and mark it as read
  */
-public class SmsDetailsFragment extends AbstractFragment implements LoaderManager.LoaderCallbacks<Cursor>  {
+public class SmsDetailsFragment extends AbstractFragment implements LoaderManager.LoaderCallbacks<Cursor>,SmsDetailsViewMvc.ShowDetailsViewMvcListener {
 
     private static final String LOG_TAG = "SmsDetailsFragment";
 
@@ -35,7 +36,7 @@ public class SmsDetailsFragment extends AbstractFragment implements LoaderManage
     // ID for a loader employed in this controller
     private static final int SMS_LOADER = 0;
 
-    private SmsDetailsViewMVC mViewMVC;
+    private SmsDetailsViewMvc mViewMVC;
 
     private long mSmsMessageId;
 
@@ -44,8 +45,8 @@ public class SmsDetailsFragment extends AbstractFragment implements LoaderManage
                              Bundle savedInstanceState) {
 
         // Instantiate MVC view associated with this fragment
-        mViewMVC = new SmsDetailsViewMVC(inflater, container);
-
+        mViewMVC = new SmsDetailsViewMvcImpl(inflater, container);
+        mViewMVC.setListener(this);
 
         // Get the argument of this fragment and look for the ID of the SMS message which should
         // be shown
@@ -65,54 +66,29 @@ public class SmsDetailsFragment extends AbstractFragment implements LoaderManage
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        // Register this fragment as a subscriber on EventBus
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        // Unregister this fragment from EventBus
-        EventBus.getDefault().unregister(this);
-    }
-
-    /**
-     * This method will be called by EventBus framework when events of type
-     * {@link SmsDetailsViewMVC.ButtonMarkReadClickEvent} will be published.
-     * @param event the event that was published on the bus
-     */
-    public void onEvent(SmsDetailsViewMVC.ButtonMarkReadClickEvent event) {
-
-        /*
-         onEvent() methods should return as quickly as possible in order not to delay notification
-         of other subscribers on EventBus.
-
-         Since marking the SMS message as read involves communication with ContentProvider,
-         we will do it on a separate thread.
-          */
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                markRead();
-            }
-        }).start();
+    public void onMarkAsReadClick() {
+        markRead();
     }
 
     /**
      * Mark the SMS message as read
      */
     private void markRead() {
-        // Uri of a particular SMS message
-        Uri smsMessageUri = ContentUris.withAppendedId(
-                Uri.parse("content://sms/inbox"), mSmsMessageId);
+        // database operations should not be executed on UI thread
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // Uri of a particular SMS message
+                Uri smsMessageUri = ContentUris.withAppendedId(
+                        Uri.parse("content://sms/inbox"), mSmsMessageId);
 
-        // Designating the fields that should be updated
-        ContentValues values = new ContentValues();
-        values.put("read", true);
+                // Designating the fields that should be updated
+                ContentValues values = new ContentValues();
+                values.put("read", true);
 
-        getActivity().getContentResolver().update(smsMessageUri, values, null, null);
+                getActivity().getContentResolver().update(smsMessageUri, values, null, null);
+            }
+        }).start();
     }
 
 
@@ -205,7 +181,6 @@ public class SmsDetailsFragment extends AbstractFragment implements LoaderManage
         }
 
     }
-
 
     // End of LoaderCallback methods
     //

@@ -8,12 +8,12 @@ import android.os.Bundle;
 import com.techyourchance.www.android_mvc_template.R;
 import com.techyourchance.www.android_mvc_template.controllers.fragments.AbstractFragment;
 import com.techyourchance.www.android_mvc_template.controllers.fragments.HomeFragment;
-import com.techyourchance.www.android_mvc_template.views.FrameLayoutViewMVC;
+import com.techyourchance.www.android_mvc_template.views.FrameLayoutViewMvcImpl;
 
 
 public class MainActivity extends Activity implements AbstractFragment.AbstractFragmentCallback {
 
-    FrameLayoutViewMVC mViewMVC;
+    FrameLayoutViewMvcImpl mViewMVC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +23,13 @@ public class MainActivity extends Activity implements AbstractFragment.AbstractF
         The MVC view associated with this activity is very simple, therefore the below lines could
         be replaced with:
         setContentView(R.layout.mvc_view_frame_layout);
-        and there would be no need for FrameLayoutViewMVC class.
+        and there would be no need for FrameLayoutViewMvc class.
         However, for the sake of consistency, we should try to stick to a single coding style,
         therefore we employ full MVC approach even in this simple case!
         */
 
         // Instantiate MVC view associated with this activity
-        mViewMVC = new FrameLayoutViewMVC(this, null);
+        mViewMVC = new FrameLayoutViewMvcImpl(this, null);
 
         // Set the root view of the associated MVC view as the content of this activity
         setContentView(mViewMVC.getRootView());
