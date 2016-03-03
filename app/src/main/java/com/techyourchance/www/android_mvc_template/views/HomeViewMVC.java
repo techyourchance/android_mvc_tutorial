@@ -1,78 +1,34 @@
 package com.techyourchance.www.android_mvc_template.views;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListAdapter;
-import android.widget.ListView;
-
-import com.techyourchance.www.android_mvc_template.R;
-
-import de.greenrobot.event.EventBus;
 
 /**
- * This MVC view contains a list view and intercepts click events
+ * This interface corresponds to "home screen" of the app where a list containing many entries
+ * should be displayed.
  */
-public class HomeViewMVC implements ViewMVC {
+public interface HomeViewMvc extends ViewMVC {
 
-
-    View mRootView;
-
-    ListView mListView;
-
-    public HomeViewMVC(LayoutInflater inflater, ViewGroup container) {
-        mRootView = inflater.inflate(R.layout.mvc_view_home, container, false);
-
-        mListView = (ListView) mRootView.findViewById(R.id.list_sms_messages);
-
-        // Register a listener for ListView's items
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                // Get the event bus
-                EventBus eventBus = EventBus.getDefault();
-
-                // Post a new event to the bus
-                eventBus.post(new ListItemClickEvent(position, id));
-
-            }
-
-        });
+    public interface HomeViewMvcListener {
+        /**
+         * This callback method will be invoked when one of the list items is being clicked
+         * @param position clicked item's position
+         * @param id clicked item's ID
+         */
+        public void onListItemClick(int position, long id);
     }
-
-    @Override
-    public View getRootView() {
-        return mRootView;
-    }
-
-    @Override
-    public Bundle getViewState() {
-        return null;
-    }
-
 
     /**
-     * Set the adapter for the ListView found in this MVC view
-     * @param adapter an adapter to use for the underlying ListView
+     * Set an adapter that will be used in this MVC view
+     * @param adapter instance of adapter to use
      */
-    public void setListAdapter(ListAdapter adapter) {
-        mListView.setAdapter(adapter);
-    }
-
+    public void setListAdapter(ListAdapter adapter);
 
     /**
-     * This nested static class represents an item click event that will be posted on EventBus.
+     * Set a listener that will be notified by this MVC view
+     * @param listener listener that should be notified; null to clear
      */
-    public static class ListItemClickEvent {
-        public int mPosition;
-        public long mId;
+    public void setListener(HomeViewMvcListener listener);
 
-        public ListItemClickEvent(int position, long id) {
-            mPosition = position;
-            mId = id;
-        }
-    }
 }

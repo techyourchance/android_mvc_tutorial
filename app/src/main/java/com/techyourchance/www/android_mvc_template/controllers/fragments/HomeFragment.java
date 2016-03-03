@@ -12,7 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.techyourchance.www.android_mvc_template.controllers.listadapters.HomeListAdapter;
-import com.techyourchance.www.android_mvc_template.views.HomeViewMVC;
+import com.techyourchance.www.android_mvc_template.views.HomeViewMvc;
+import com.techyourchance.www.android_mvc_template.views.HomeViewMvcImpl;
 
 import de.greenrobot.event.EventBus;
 
@@ -20,25 +21,25 @@ import de.greenrobot.event.EventBus;
 /**
  * A Fragment containing a list of phone's contacts
  */
-public class HomeFragment extends AbstractFragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class HomeFragment extends AbstractFragment implements
+        LoaderManager.LoaderCallbacks<Cursor>, HomeViewMvc.HomeViewMvcListener {
 
     private static final String LOG_TAG = "HomeFragment";
 
     // ID for a loader employed in this controller
     private static final int SMS_LOADER = 0;
 
-    HomeViewMVC mViewMVC;
+    HomeViewMvc mViewMVC;
 
     HomeListAdapter mAdapter;
-
-    EventBus mEventBus = EventBus.getDefault();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // Instantiate MVC view associated with this fragment
-        mViewMVC = new HomeViewMVC(inflater, container);
+        // Instantiate MVC view and set the fragment as listener
+        mViewMVC = new HomeViewMvcImpl(inflater, container);
+        mViewMVC.setListener(this);
 
         // Perform all initializations related to the ListView
         initializeList();
@@ -65,30 +66,10 @@ public class HomeFragment extends AbstractFragment implements LoaderManager.Load
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        // Register this fragment as a subscriber on EventBus
-        mEventBus.register(this);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        // Unregister this fragment from the EventBus
-        mEventBus.unregister(this);
-    }
-
-
-    /**
-     * This method will be called by EventBus framework when events of type
-     * {@link HomeViewMVC.ListItemClickEvent} will be published.
-     * @param event the event that was published on the bus
-     */
-    public void onEvent(HomeViewMVC.ListItemClickEvent event) {
-
+    public void onListItemClick(int position, long id) {
         // Create a bundle that will pass the ID of the clicked SMS message to the new fragment
         Bundle args = new Bundle(1);
-        args.putLong(SmsDetailsFragment.ARG_SMS_MESSAGE_ID, event.mId);
+        args.putLong(SmsDetailsFragment.ARG_SMS_MESSAGE_ID, id);
 
         // Replace this fragment with a new one and pass args to it
         replaceFragment(SmsDetailsFragment.class, true, args);
@@ -170,7 +151,5 @@ public class HomeFragment extends AbstractFragment implements LoaderManager.Load
     // End of LoaderCallback methods
     //
     // ---------------------------------------------------------------------------------------------
-
-
 
 }
