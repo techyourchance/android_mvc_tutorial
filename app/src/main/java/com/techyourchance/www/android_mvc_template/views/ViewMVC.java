@@ -10,7 +10,7 @@ import android.view.View;
  * Please note that MVC view is not the same as Android View - MVC view will usually wrap one or
  * more Android View's while adding logic for communication with MVC Controller.
  */
-public interface ViewMVC {
+public interface ViewMvc {
 
     /**
      * Get the root Android View which is used internally by this MVC View for presenting data

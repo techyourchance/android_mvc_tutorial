@@ -1,14 +1,12 @@
 package com.techyourchance.www.android_mvc_template.views;
 
-import android.os.Bundle;
-import android.view.View;
 import android.widget.ListAdapter;
 
 /**
  * This interface corresponds to "home screen" of the app where a list containing many entries
  * should be displayed.
  */
-public interface HomeViewMvc extends ViewMVC {
+public interface HomeViewMvc extends ViewMvc {
 
     public interface HomeViewMvcListener {
         /**

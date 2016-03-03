@@ -11,7 +11,7 @@ import com.techyourchance.www.android_mvc_template.R;
 /**
  * Very simple MVC view containing just single FrameLayout
  */
-public class FrameLayoutViewMvcImpl implements ViewMVC {
+public class FrameLayoutViewMvcImpl implements ViewMvc {
 
     private View mRootView;
 

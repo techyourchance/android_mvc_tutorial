@@ -6,7 +6,7 @@ import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
  * This interface corresponds to "details" screen of the app, where details of a single SMS
  * message should be displayed
  */
-public interface SmsDetailsViewMvc extends ViewMVC {
+public interface SmsDetailsViewMvc extends ViewMvc {
 
     public interface ShowDetailsViewMvcListener {
         /**
