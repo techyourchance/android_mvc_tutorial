@@ -93,7 +93,6 @@ public class MainActivity extends Activity implements AbstractFragment.AbstractF
     private boolean isFragmentShown(Class<? extends Fragment> claz) {
         Fragment currFragment = getFragmentManager().findFragmentById(R.id.frame_contents);
 
-
         return (currFragment == null && claz == null) ||
                 (currFragment != null && claz.isInstance(currFragment));
     }
