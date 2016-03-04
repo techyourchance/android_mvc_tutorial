@@ -1,4 +1,4 @@
-# Android MVC template
+# Android MVC/MVP template
 
 This simple SMS inbox reader application demonstrates one of the possible approaches to implementation of MVC architectural pattern in Android.
 
@@ -7,18 +7,6 @@ You're invited to clone/fork this repository and use it as a template for your o
 # Detailed walkthrough
 
 I wrote a series of posts about this particular implementation of MVC for Android in a [blog](http://www.techyourchance.com/model-view-controller-mvc-and-model-view-presenter-mvp-architectural-patterns-in-android-part-1/). 
-
-# Fine print
-
-As a matter of fact, the architecture proposed is that of MVP rather than a pure MVC. 
-
-I decided to call it MVC template because I assume that a person looking for Android MVC is looking for a suitable architectural pattern for Android application rather than MVC specifically. Moreover, there is a widespread tendendency to ignore the distinction between MVC and MVP and just call them both MVC.
-
-I apologize for misguiding you if you're seeking for a pure MVC template.
-
-# Third party libraries
-
-GreenRobot's [EventBus library](https://github.com/greenrobot/EventBus) is used as a messaging framework between MVC components.
 
 # License
 
