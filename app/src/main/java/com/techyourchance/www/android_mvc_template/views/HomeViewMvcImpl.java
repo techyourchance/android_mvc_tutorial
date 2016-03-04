@@ -10,8 +10,6 @@ import android.widget.ListView;
 
 import com.techyourchance.www.android_mvc_template.R;
 
-import de.greenrobot.event.EventBus;
-
 /**
  * This MVC view contains a list view and intercepts click events
  */

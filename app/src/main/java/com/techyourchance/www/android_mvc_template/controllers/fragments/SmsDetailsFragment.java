@@ -17,7 +17,6 @@ import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
 import com.techyourchance.www.android_mvc_template.views.SmsDetailsViewMvc;
 import com.techyourchance.www.android_mvc_template.views.SmsDetailsViewMvcImpl;
 
-import de.greenrobot.event.EventBus;
 
 /**
  * This fragment is used to show the details of a SMS message and mark it as read

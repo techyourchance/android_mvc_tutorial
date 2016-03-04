@@ -15,9 +15,6 @@ import com.techyourchance.www.android_mvc_template.controllers.listadapters.Home
 import com.techyourchance.www.android_mvc_template.views.HomeViewMvc;
 import com.techyourchance.www.android_mvc_template.views.HomeViewMvcImpl;
 
-import de.greenrobot.event.EventBus;
-
-
 /**
  * A Fragment containing a list of phone's contacts
  */
