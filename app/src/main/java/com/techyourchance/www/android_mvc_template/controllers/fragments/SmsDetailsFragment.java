@@ -21,9 +21,10 @@ import com.techyourchance.www.android_mvc_template.views.SmsDetailsViewMvcImpl;
 /**
  * This fragment is used to show the details of a SMS message and mark it as read
  */
-public class SmsDetailsFragment extends AbstractFragment implements LoaderManager.LoaderCallbacks<Cursor>,SmsDetailsViewMvc.ShowDetailsViewMvcListener {
+public class SmsDetailsFragment extends AbstractFragment implements
+        LoaderManager.LoaderCallbacks<Cursor>, SmsDetailsViewMvc.ShowDetailsViewMvcListener {
 
-    private static final String LOG_TAG = "SmsDetailsFragment";
+    private static final String TAG = "SmsDetailsFragment";
 
     /**
      * This constant should be used as a key in a Bundle passed to this fragment as an argument
@@ -57,7 +58,7 @@ public class SmsDetailsFragment extends AbstractFragment implements LoaderManage
         } else {
             // If no ID was provided in the arguments then LoaderManager will not be initiated,
             // and as a result of this - no data will be shown in this fragment
-            Log.e(LOG_TAG, "no SMS message ID was passed in arguments");
+            Log.e(TAG, "no SMS message ID was passed in arguments");
         }
 
         // Return the root view of the associated MVC view
@@ -137,7 +138,7 @@ public class SmsDetailsFragment extends AbstractFragment implements LoaderManage
                     sortOrder);
 
         } else {
-            Log.e(LOG_TAG, "onCreateLoader() called with unrecognized id: " + id);
+            Log.e(TAG, "onCreateLoader() called with unrecognized id: " + id);
             return null;
         }
 
@@ -155,7 +156,7 @@ public class SmsDetailsFragment extends AbstractFragment implements LoaderManage
                 try {
                     smsMessage = SmsMessage.createSmsMessage(cursor);
                 } catch (IllegalArgumentException e) {
-                    Log.e(LOG_TAG, "Couldn't create SmsMessage from the provided Cursor...");
+                    Log.e(TAG, "Couldn't create SmsMessage from the provided Cursor...");
                     e.printStackTrace();
                     return;
                 }
@@ -164,10 +165,10 @@ public class SmsDetailsFragment extends AbstractFragment implements LoaderManage
                 mViewMVC.showSmsDetails(smsMessage);
 
             } else {
-                Log.e(LOG_TAG, "the Cursor provided to onLoadFinished() is empty");
+                Log.e(TAG, "the Cursor provided to onLoadFinished() is empty");
             }
         } else {
-            Log.e(LOG_TAG, "onLoadFinished() called with unrecognized loader id: " + loader.getId());
+            Log.e(TAG, "onLoadFinished() called with unrecognized loader id: " + loader.getId());
         }
     }
 
@@ -176,7 +177,7 @@ public class SmsDetailsFragment extends AbstractFragment implements LoaderManage
         if (loader.getId() == SMS_LOADER) {
             // Nothing to do here
         } else {
-            Log.e(LOG_TAG, "onLoaderReset() called with unrecognized loader id: " + loader.getId());
+            Log.e(TAG, "onLoaderReset() called with unrecognized loader id: " + loader.getId());
         }
 
     }

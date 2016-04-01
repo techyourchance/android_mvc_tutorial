@@ -19,7 +19,7 @@ import com.techyourchance.www.android_mvc_template.views.SmsThumbnailViewMvcImpl
 public class HomeListAdapter extends CursorAdapter {
 
 
-    private final static String LOG_TAG = "HomeListAdapter";
+    private final static String TAG = "HomeListAdapter";
 
 
     public HomeListAdapter(Context context, Cursor cursor, int flags) {
@@ -50,7 +50,7 @@ public class HomeListAdapter extends CursorAdapter {
         try {
             smsMessage = SmsMessage.createSmsMessage(cursor);
         } catch (IllegalArgumentException e) {
-            Log.e(LOG_TAG, "Couldn't create SmsMessage from the provided Cursor...");
+            Log.e(TAG, "Couldn't create SmsMessage from the provided Cursor...");
             e.printStackTrace();
             return;
         }

@@ -16,12 +16,12 @@ import com.techyourchance.www.android_mvc_template.views.HomeViewMvc;
 import com.techyourchance.www.android_mvc_template.views.HomeViewMvcImpl;
 
 /**
- * A Fragment containing a list of phone's contacts
+ * A Fragment containing a list of SMS messages
  */
 public class HomeFragment extends AbstractFragment implements
         LoaderManager.LoaderCallbacks<Cursor>, HomeViewMvc.HomeViewMvcListener {
 
-    private static final String LOG_TAG = "HomeFragment";
+    private static final String TAG = "HomeFragment";
 
     // ID for a loader employed in this controller
     private static final int SMS_LOADER = 0;
@@ -117,7 +117,7 @@ public class HomeFragment extends AbstractFragment implements
                     sortOrder);
 
         } else {
-            Log.e(LOG_TAG, "onCreateLoader() called with unrecognized id: " + id);
+            Log.e(TAG, "onCreateLoader() called with unrecognized id: " + id);
             return null;
         }
 
@@ -129,7 +129,7 @@ public class HomeFragment extends AbstractFragment implements
             // When the load is finished - pass the Cursor with the results to our CursorAdapter
             mAdapter.swapCursor(cursor);
         } else {
-            Log.e(LOG_TAG, "onLoadFinished() called with unrecognized loader id: " + loader.getId());
+            Log.e(TAG, "onLoadFinished() called with unrecognized loader id: " + loader.getId());
         }
     }
 
@@ -139,7 +139,7 @@ public class HomeFragment extends AbstractFragment implements
             // Releasing the resources
             mAdapter.swapCursor(null);
         } else {
-            Log.e(LOG_TAG, "onLoaderReset() called with unrecognized loader id: " + loader.getId());
+            Log.e(TAG, "onLoaderReset() called with unrecognized loader id: " + loader.getId());
         }
 
     }

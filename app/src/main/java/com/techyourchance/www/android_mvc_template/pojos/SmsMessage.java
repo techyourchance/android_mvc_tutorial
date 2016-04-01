@@ -7,7 +7,7 @@ import android.database.Cursor;
  */
 public class SmsMessage {
 
-    private static final String LOG_TAG = "SmsMessage";
+    private static final String TAG = "SmsMessage";
 
     public String mAddress;
     public String mBody;
