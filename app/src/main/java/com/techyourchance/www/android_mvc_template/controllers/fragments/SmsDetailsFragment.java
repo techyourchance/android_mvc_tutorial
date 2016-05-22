@@ -14,8 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
-import com.techyourchance.www.android_mvc_template.views.SmsDetailsViewMvc;
-import com.techyourchance.www.android_mvc_template.views.SmsDetailsViewMvcImpl;
+import com.techyourchance.www.android_mvc_template.views.smsdetails.SmsDetailsViewMvc;
+import com.techyourchance.www.android_mvc_template.views.smsdetails.SmsDetailsViewMvcImpl;
 
 
 /**

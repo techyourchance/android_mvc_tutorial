@@ -1,6 +1,8 @@
-package com.techyourchance.www.android_mvc_template.views;
+package com.techyourchance.www.android_mvc_template.views.home;
 
 import android.widget.ListAdapter;
+
+import com.techyourchance.www.android_mvc_template.views.ViewMvc;
 
 /**
  * This interface corresponds to "home screen" of the app where a list containing many entries

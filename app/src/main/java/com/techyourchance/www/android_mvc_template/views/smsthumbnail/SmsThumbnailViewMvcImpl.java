@@ -1,19 +1,15 @@
-package com.techyourchance.www.android_mvc_template.views;
+package com.techyourchance.www.android_mvc_template.views.smsthumbnail;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.techyourchance.www.android_mvc_template.R;
 import com.techyourchance.www.android_mvc_template.Utils;
 import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * This MVC view represents a single element in ListView.

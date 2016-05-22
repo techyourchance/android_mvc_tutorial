@@ -8,12 +8,12 @@ import android.os.Bundle;
 import com.techyourchance.www.android_mvc_template.R;
 import com.techyourchance.www.android_mvc_template.controllers.fragments.AbstractFragment;
 import com.techyourchance.www.android_mvc_template.controllers.fragments.HomeFragment;
-import com.techyourchance.www.android_mvc_template.views.FrameLayoutViewMvcImpl;
+import com.techyourchance.www.android_mvc_template.views.root.RootViewMvcImpl;
 
 
 public class MainActivity extends Activity implements AbstractFragment.AbstractFragmentCallback {
 
-    FrameLayoutViewMvcImpl mViewMVC;
+    RootViewMvcImpl mViewMVC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class MainActivity extends Activity implements AbstractFragment.AbstractF
         */
 
         // Instantiate MVC view associated with this activity
-        mViewMVC = new FrameLayoutViewMvcImpl(this, null);
+        mViewMVC = new RootViewMvcImpl(this, null);
 
         // Set the root view of the associated MVC view as the content of this activity
         setContentView(mViewMVC.getRootView());

@@ -12,8 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.techyourchance.www.android_mvc_template.controllers.listadapters.HomeListAdapter;
-import com.techyourchance.www.android_mvc_template.views.HomeViewMvc;
-import com.techyourchance.www.android_mvc_template.views.HomeViewMvcImpl;
+import com.techyourchance.www.android_mvc_template.views.home.HomeViewMvc;
+import com.techyourchance.www.android_mvc_template.views.home.HomeViewMvcImpl;
 
 /**
  * A Fragment containing a list of SMS messages

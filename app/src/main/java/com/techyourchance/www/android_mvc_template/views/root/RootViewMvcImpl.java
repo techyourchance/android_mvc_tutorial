@@ -1,4 +1,4 @@
-package com.techyourchance.www.android_mvc_template.views;
+package com.techyourchance.www.android_mvc_template.views.root;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,15 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.techyourchance.www.android_mvc_template.R;
+import com.techyourchance.www.android_mvc_template.views.ViewMvc;
 
 /**
  * Very simple MVC view containing just single FrameLayout
  */
-public class FrameLayoutViewMvcImpl implements ViewMvc {
+public class RootViewMvcImpl implements ViewMvc {
 
     private View mRootView;
 
-    public FrameLayoutViewMvcImpl(Context context, ViewGroup container) {
+    public RootViewMvcImpl(Context context, ViewGroup container) {
         mRootView = LayoutInflater.from(context).inflate(R.layout.mvc_view_frame_layout, container);
     }
 

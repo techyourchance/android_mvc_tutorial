@@ -3,14 +3,13 @@ package com.techyourchance.www.android_mvc_template.controllers.listadapters;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 
 import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
-import com.techyourchance.www.android_mvc_template.views.SmsThumbnailViewMvc;
-import com.techyourchance.www.android_mvc_template.views.SmsThumbnailViewMvcImpl;
+import com.techyourchance.www.android_mvc_template.views.smsthumbnail.SmsThumbnailViewMvc;
+import com.techyourchance.www.android_mvc_template.views.smsthumbnail.SmsThumbnailViewMvcImpl;
 
 /**
  * This implementation of CursorAdapter is used for parsing Cursor's entries into SmsMessage

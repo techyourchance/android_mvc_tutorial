@@ -1,6 +1,7 @@
-package com.techyourchance.www.android_mvc_template.views;
+package com.techyourchance.www.android_mvc_template.views.smsthumbnail;
 
 import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
+import com.techyourchance.www.android_mvc_template.views.ViewMvc;
 
 /**
  * This interface corresponds to a single SMS preview element (thumbnail) which is intended to
