@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.techyourchance.www.android_mvc_template.controllers.listadapters.HomeListAdapter;
 import com.techyourchance.www.android_mvc_template.views.home.HomeViewMvc;
 import com.techyourchance.www.android_mvc_template.views.home.HomeViewMvcImpl;
 
@@ -28,8 +27,6 @@ public class HomeFragment extends AbstractFragment implements
 
     HomeViewMvc mViewMVC;
 
-    HomeListAdapter mAdapter;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,28 +35,12 @@ public class HomeFragment extends AbstractFragment implements
         mViewMVC = new HomeViewMvcImpl(inflater, container);
         mViewMVC.setListener(this);
 
-        // Perform all initializations related to the ListView
-        initializeList();
-
-        // Return the root view of the associated MVC view
-        return mViewMVC.getRootView();
-    }
-
-
-    private void initializeList() {
-        /*
-         Note that we are passing null instead of a Cursor - the actual Cursor with the
-         results will be passed to this adapter after LoaderManager framework will call
-         onLoadFinished() callback method.
-          */
-        mAdapter = new HomeListAdapter(getActivity(), null, 0);
-
-        // Pass the adapter to the MVC view
-        mViewMVC.setListAdapter(mAdapter);
-
         // This line of code initializes the LoaderManager framework and instructs it to "manage"
         // a Loader (in our case - CursorLoader) with the specified ID (SMS_LOADER)
         getLoaderManager().initLoader(SMS_LOADER, null, this);
+
+        // Return the root view of the associated MVC view
+        return mViewMVC.getRootView();
     }
 
     @Override
@@ -127,7 +108,7 @@ public class HomeFragment extends AbstractFragment implements
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         if (loader.getId() == SMS_LOADER) {
             // When the load is finished - pass the Cursor with the results to our CursorAdapter
-            mAdapter.swapCursor(cursor);
+            mViewMVC.swapCursor(cursor);
         } else {
             Log.e(TAG, "onLoadFinished() called with unrecognized loader id: " + loader.getId());
         }
@@ -137,13 +118,12 @@ public class HomeFragment extends AbstractFragment implements
     public void onLoaderReset(Loader<Cursor> loader) {
         if (loader.getId() == SMS_LOADER) {
             // Releasing the resources
-            mAdapter.swapCursor(null);
+            mViewMVC.swapCursor(null);
         } else {
             Log.e(TAG, "onLoaderReset() called with unrecognized loader id: " + loader.getId());
         }
 
     }
-
 
     // End of LoaderCallback methods
     //

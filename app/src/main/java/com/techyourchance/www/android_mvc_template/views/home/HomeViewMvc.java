@@ -1,5 +1,6 @@
 package com.techyourchance.www.android_mvc_template.views.home;
 
+import android.database.Cursor;
 import android.widget.ListAdapter;
 
 import com.techyourchance.www.android_mvc_template.views.ViewMvc;
@@ -20,10 +21,13 @@ public interface HomeViewMvc extends ViewMvc {
     }
 
     /**
-     * Set an adapter that will be used in this MVC view
-     * @param adapter instance of adapter to use
+     * Bind a cursor containing SMS messages data which should be shown by this MVC view
+     * @param cursor a valid cursor object; NOTE: it is assumed that the cursors passed to this
+     *               method are managed externally, but will not be closed or invalidated as long
+     *               as it is not "cleared" from this MVC view by passing another Cursor or null to
+     *               this method
      */
-    public void setListAdapter(ListAdapter adapter);
+    public void swapCursor(Cursor cursor);
 
     /**
      * Set a listener that will be notified by this MVC view

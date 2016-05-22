@@ -1,4 +1,4 @@
-package com.techyourchance.www.android_mvc_template.controllers.listadapters;
+package com.techyourchance.www.android_mvc_template.views.home;
 
 import android.content.Context;
 import android.database.Cursor;
