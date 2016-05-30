@@ -7,12 +7,15 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.techyourchance.www.android_mvc_template.R;
 import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
 import com.techyourchance.www.android_mvc_template.views.smsdetails.SmsDetailsViewMvc;
 import com.techyourchance.www.android_mvc_template.views.smsdetails.SmsDetailsViewMvcImpl;
@@ -48,6 +51,16 @@ public class SmsDetailsFragment extends AbstractFragment implements
         mViewMVC = new SmsDetailsViewMvcImpl(inflater, container);
         mViewMVC.setListener(this);
 
+        // Return the root view of the associated MVC view
+        return mViewMVC.getRootView();
+    }
+
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
         // Get the argument of this fragment and look for the ID of the SMS message which should
         // be shown
         Bundle args = getArguments();
@@ -61,19 +74,25 @@ public class SmsDetailsFragment extends AbstractFragment implements
             Log.e(TAG, "no SMS message ID was passed in arguments");
         }
 
-        // Return the root view of the associated MVC view
-        return mViewMVC.getRootView();
+
+        /*
+        Starting with API 19 (KitKat), only applications designated as default SMS applications
+        can alter SMS attributes (though they still can read SMSs), therefore the on post KitKat
+        versions "mark as read" button is only relevant if this app is the default SMS app.
+         */
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if (!Telephony.Sms.getDefaultSmsPackage(getActivity())
+                    .equals(getActivity().getPackageName())) {
+                mViewMVC.hideMarkAsReadButton();
+            } else {
+                mViewMVC.showMarkAsReadButton();
+            }
+        }
+
     }
 
     @Override
     public void onMarkAsReadClick() {
-        markRead();
-    }
-
-    /**
-     * Mark the SMS message as read
-     */
-    private void markRead() {
         // database operations should not be executed on UI thread
         new Thread(new Runnable() {
             @Override
@@ -90,7 +109,6 @@ public class SmsDetailsFragment extends AbstractFragment implements
             }
         }).start();
     }
-
 
     // ---------------------------------------------------------------------------------------------
     //

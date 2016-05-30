@@ -35,12 +35,18 @@ public class HomeFragment extends AbstractFragment implements
         mViewMVC = new HomeViewMvcImpl(inflater, container);
         mViewMVC.setListener(this);
 
+        // Return the root view of the associated MVC view
+        return mViewMVC.getRootView();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
         // This line of code initializes the LoaderManager framework and instructs it to "manage"
         // a Loader (in our case - CursorLoader) with the specified ID (SMS_LOADER)
         getLoaderManager().initLoader(SMS_LOADER, null, this);
 
-        // Return the root view of the associated MVC view
-        return mViewMVC.getRootView();
     }
 
     @Override

@@ -11,7 +11,7 @@ import com.techyourchance.www.android_mvc_template.R;
 import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
 
 /**
- * This MVC view contains a list view and intercepts click events
+ * An implementation of {@link SmsDetailsViewMvc} interface
  */
 public class SmsDetailsViewMvcImpl implements SmsDetailsViewMvc {
 
@@ -45,6 +45,16 @@ public class SmsDetailsViewMvcImpl implements SmsDetailsViewMvc {
         mTxtDate = (TextView) mRootView.findViewById(R.id.txt_sms_date);
         mTxtBody = (TextView) mRootView.findViewById(R.id.txt_sms_body);
         mBtnMarkAsRead = (Button) mRootView.findViewById(R.id.btn_mark_as_read);
+    }
+
+    @Override
+    public void hideMarkAsReadButton() {
+        mBtnMarkAsRead.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showMarkAsReadButton() {
+        mBtnMarkAsRead.setVisibility(View.VISIBLE);
     }
 
     @Override

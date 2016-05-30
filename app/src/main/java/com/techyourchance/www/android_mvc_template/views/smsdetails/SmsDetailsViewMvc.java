@@ -9,12 +9,23 @@ import com.techyourchance.www.android_mvc_template.views.ViewMvc;
  */
 public interface SmsDetailsViewMvc extends ViewMvc {
 
+
     public interface ShowDetailsViewMvcListener {
         /**
          * This callback will be invoked when "mark as read" button is being clicked
          */
         public void onMarkAsReadClick();
     }
+
+    /**
+     * Hide "mark as read" button
+     */
+    void hideMarkAsReadButton();
+
+    /**
+     * Show "mark as read" button
+     */
+    void showMarkAsReadButton();
 
     /**
      * Show details of a particular SMS message
