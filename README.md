@@ -6,7 +6,7 @@ You're invited to clone/fork this repository and use it as a template for your o
 
 # Detailed walkthrough
 
-I wrote a series of posts about this particular implementation of MVC for Android in a [blog](http://www.techyourchance.com/model-view-controller-mvc-and-model-view-presenter-mvp-architectural-patterns-in-android-part-1/). 
+I wrote a series of posts about this particular implementation of MVC for Android in a [blog](http://www.techyourchance.com/mvc-and-mvp-architectural-patterns-in-android-part-1/). 
 
 # License
 
