@@ -1,4 +1,4 @@
-# Android MVC/MVP template
+# Android MVC/MVP tutorial
 
 This simple SMS inbox reader application demonstrates one of the possible approaches to implementation of MVC architectural pattern in Android.
 
@@ -10,4 +10,4 @@ I wrote a series of posts about this particular implementation of MVC for Androi
 
 # License
 
-android_mvc_template binaries and source code can be used according to the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+android_mvc_tutorial binaries and source code can be used according to the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
