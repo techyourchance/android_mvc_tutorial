@@ -51,10 +51,6 @@ public class SmsDetailsFragment extends BaseFragment implements
                 getMainThreadPoster(),
                 getBackgroundThreadPoster());
 
-        // Instantiate MVC view associated with this fragment
-        mViewMVC = new SmsDetailsViewMvcImpl(inflater, container);
-        mViewMVC.setListener(this);
-
         // Get the argument of this fragment and look for the ID of the SMS message which should
         // be shown
         Bundle args = getArguments();
@@ -63,6 +59,11 @@ public class SmsDetailsFragment extends BaseFragment implements
         } else {
             throw new IllegalStateException("SmsDetailsFragment must be started with SMS message ID argument");
         }
+
+
+        // Instantiate MVC view associated with this fragment
+        mViewMVC = new SmsDetailsViewMvcImpl(inflater, container);
+        mViewMVC.setListener(this);
 
         /*
         Starting with API 19 (KitKat), only applications designated as default SMS applications
@@ -97,21 +98,7 @@ public class SmsDetailsFragment extends BaseFragment implements
 
     @Override
     public void onMarkAsReadClick() {
-        // database operations should not be executed on UI thread
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // Uri of a particular SMS message
-                Uri smsMessageUri = ContentUris.withAppendedId(
-                        Uri.parse("content://sms/inbox"), mSmsMessageId);
-
-                // Designating the fields that should be updated
-                ContentValues values = new ContentValues();
-                values.put("read", true);
-
-                getActivity().getContentResolver().update(smsMessageUri, values, null, null);
-            }
-        }).start();
+        mSmsMessagesManager.markMessageAsRead(mSmsMessageId);
     }
 
     @Override

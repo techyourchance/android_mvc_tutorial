@@ -2,6 +2,7 @@ package com.techyourchance.www.android_mvc_tutorial.managers;
 
 import android.content.ContentResolver;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 
@@ -37,6 +38,7 @@ public class SmsMessagesManager {
 
     // Default sort order by descending date
     private static final String DEFAULT_SORT_ORDER = "date DESC";
+
 
     /**
      * Classes implementing this interface can be registered as callbacks with
@@ -141,6 +143,27 @@ public class SmsMessagesManager {
         }
     }
 
+    /**
+     * Mark specific SMS message as read.
+     * @param id ID of message to be marked as read.
+     */
+    public void markMessageAsRead(final long id) {
+        mBackgroundThreadPoster.post(new Runnable() {
+            @Override
+            public void run() {
+                // Designating the fields that should be updated
+                ContentValues values = new ContentValues();
+                values.put("read", true);
+
+                mContentResolver.update(
+                        ContentUris.withAppendedId(Uri.parse(CONTENT_URI), id),
+                        values,
+                        null,
+                        null);
+            }
+        });
+
+    }
 
     public void registerListener(SmsMessagesManagerListener listener) {
         if (listener != null) mListeners.add(listener);
