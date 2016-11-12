@@ -26,7 +26,7 @@ public interface SmsDetailsViewMvc extends ViewMvc {
      * Show details of a particular SMS message
      * @param smsMessage a message to show
      */
-    void bindSmsDetails(SmsMessage smsMessage);
+    void bindSmsMessage(SmsMessage smsMessage);
 
 
     /**

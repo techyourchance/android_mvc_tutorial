@@ -55,7 +55,7 @@ public class SmsDetailsViewMvcImpl implements SmsDetailsViewMvc {
 
 
     @Override
-    public void bindSmsDetails(SmsMessage smsMessage) {
+    public void bindSmsMessage(SmsMessage smsMessage) {
         mTxtAddress.setText(smsMessage.getAddress());
         mTxtDate.setText(smsMessage.getDate());
         mTxtBody.setText(smsMessage.getBody());

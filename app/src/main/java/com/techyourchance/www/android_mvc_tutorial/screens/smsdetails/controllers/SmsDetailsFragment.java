@@ -102,7 +102,7 @@ public class SmsDetailsFragment extends BaseFragment implements
     public void onSmsMessagesFetched(List<SmsMessage> smsMessages) {
         for (SmsMessage smsMessage : smsMessages) {
             if (smsMessage.getId() == mSmsMessageId) {
-                mViewMVC.bindSmsDetails(smsMessage);
+                mViewMVC.bindSmsMessage(smsMessage);
                 return;
             }
         }
