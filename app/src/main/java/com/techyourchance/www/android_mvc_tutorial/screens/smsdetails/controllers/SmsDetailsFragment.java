@@ -1,8 +1,5 @@
 package com.techyourchance.www.android_mvc_tutorial.screens.smsdetails.controllers;
 
-import android.content.ContentUris;
-import android.content.ContentValues;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Telephony;
@@ -12,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.techyourchance.www.android_mvc_tutorial.managers.SmsMessagesManager;
-import com.techyourchance.www.android_mvc_tutorial.screens.common.controllers.BaseFragment;
 import com.techyourchance.www.android_mvc_tutorial.pojos.SmsMessage;
+import com.techyourchance.www.android_mvc_tutorial.screens.common.controllers.BaseFragment;
 import com.techyourchance.www.android_mvc_tutorial.screens.smsdetails.mvcviews.SmsDetailsViewMvc;
 import com.techyourchance.www.android_mvc_tutorial.screens.smsdetails.mvcviews.SmsDetailsViewMvcImpl;
 
