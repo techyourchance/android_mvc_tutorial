@@ -1,23 +1,22 @@
-package com.techyourchance.www.android_mvc_template.views.home;
+package com.techyourchance.www.android_mvc_template.screens.smsall.mvcviews;
 
 import android.database.Cursor;
-import android.widget.ListAdapter;
 
-import com.techyourchance.www.android_mvc_template.views.ViewMvc;
+import com.techyourchance.www.android_mvc_template.screens.common.mvcviews.ViewMvc;
 
 /**
  * This interface corresponds to "home screen" of the app where a list containing many entries
  * should be displayed.
  */
-public interface HomeViewMvc extends ViewMvc {
+public interface SmsAllViewMvc extends ViewMvc {
 
-    public interface HomeViewMvcListener {
+    interface ListSmsViewMvcListener {
         /**
          * This callback method will be invoked when one of the list items is being clicked
          * @param position clicked item's position
          * @param id clicked item's ID
          */
-        public void onListItemClick(int position, long id);
+        void onListItemClick(int position, long id);
     }
 
     /**
@@ -27,12 +26,12 @@ public interface HomeViewMvc extends ViewMvc {
      *               as it is not "cleared" from this MVC view by passing another Cursor or null to
      *               this method
      */
-    public void swapCursor(Cursor cursor);
+    void swapCursor(Cursor cursor);
 
     /**
      * Set a listener that will be notified by this MVC view
      * @param listener listener that should be notified; null to clear
      */
-    public void setListener(HomeViewMvcListener listener);
+    void setListener(ListSmsViewMvcListener listener);
 
 }

@@ -1,4 +1,4 @@
-package com.techyourchance.www.android_mvc_template.views.home;
+package com.techyourchance.www.android_mvc_template.screens.smsall.listadapters;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -8,20 +8,20 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 
 import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
-import com.techyourchance.www.android_mvc_template.views.smsthumbnail.SmsThumbnailViewMvc;
-import com.techyourchance.www.android_mvc_template.views.smsthumbnail.SmsThumbnailViewMvcImpl;
+import com.techyourchance.www.android_mvc_template.screens.smsall.mvcviews.SmsThumbnailViewMvc;
+import com.techyourchance.www.android_mvc_template.screens.smsall.mvcviews.SmsThumbnailViewMvcImpl;
 
 /**
  * This implementation of CursorAdapter is used for parsing Cursor's entries into SmsMessage
  * objects, and displaying their contents in ListView
  */
-public class HomeListAdapter extends CursorAdapter {
+public class ListSmsAdapter extends CursorAdapter {
 
 
-    private final static String TAG = "HomeListAdapter";
+    private final static String TAG = "ListSmsAdapter";
 
 
-    public HomeListAdapter(Context context, Cursor cursor, int flags) {
+    public ListSmsAdapter(Context context, Cursor cursor, int flags) {
         super(context, cursor, flags);
     }
 

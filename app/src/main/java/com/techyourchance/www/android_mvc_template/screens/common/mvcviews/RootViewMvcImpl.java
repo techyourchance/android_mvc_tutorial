@@ -1,4 +1,4 @@
-package com.techyourchance.www.android_mvc_template.views.root;
+package com.techyourchance.www.android_mvc_template.screens.common.mvcviews;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.techyourchance.www.android_mvc_template.R;
-import com.techyourchance.www.android_mvc_template.views.ViewMvc;
+import com.techyourchance.www.android_mvc_template.screens.common.mvcviews.ViewMvc;
 
 /**
  * Very simple MVC view containing just single FrameLayout

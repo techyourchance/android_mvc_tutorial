@@ -1,4 +1,4 @@
-package com.techyourchance.www.android_mvc_template.controllers.fragments;
+package com.techyourchance.www.android_mvc_template.screens.smsall.controllers;
 
 import android.app.LoaderManager;
 import android.content.CursorLoader;
@@ -11,28 +11,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.techyourchance.www.android_mvc_template.views.home.HomeViewMvc;
-import com.techyourchance.www.android_mvc_template.views.home.HomeViewMvcImpl;
+import com.techyourchance.www.android_mvc_template.screens.common.controllers.BaseFragment;
+import com.techyourchance.www.android_mvc_template.screens.smsdetails.controllers.SmsDetailsFragment;
+import com.techyourchance.www.android_mvc_template.screens.smsall.mvcviews.SmsAllViewMvc;
+import com.techyourchance.www.android_mvc_template.screens.smsall.mvcviews.SmsAllViewMvcImpl;
 
 /**
  * A Fragment containing a list of SMS messages
  */
-public class HomeFragment extends BaseFragment implements
-        LoaderManager.LoaderCallbacks<Cursor>, HomeViewMvc.HomeViewMvcListener {
+public class SmsAllFragment extends BaseFragment implements
+        LoaderManager.LoaderCallbacks<Cursor>, SmsAllViewMvc.ListSmsViewMvcListener {
 
-    private static final String TAG = "HomeFragment";
+    private static final String TAG = "SmsAllFragment";
 
     // ID for a loader employed in this controller
     private static final int SMS_LOADER = 0;
 
-    HomeViewMvc mViewMVC;
+    SmsAllViewMvc mViewMVC;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         // Instantiate MVC view and set the fragment as listener
-        mViewMVC = new HomeViewMvcImpl(inflater, container);
+        mViewMVC = new SmsAllViewMvcImpl(inflater, container);
         mViewMVC.setListener(this);
 
         // Return the root view of the associated MVC view

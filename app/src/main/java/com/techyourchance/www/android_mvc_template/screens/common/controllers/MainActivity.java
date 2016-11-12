@@ -1,4 +1,4 @@
-package com.techyourchance.www.android_mvc_template.controllers.activities;
+package com.techyourchance.www.android_mvc_template.screens.common.controllers;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -6,9 +6,8 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.techyourchance.www.android_mvc_template.R;
-import com.techyourchance.www.android_mvc_template.controllers.fragments.BaseFragment;
-import com.techyourchance.www.android_mvc_template.controllers.fragments.HomeFragment;
-import com.techyourchance.www.android_mvc_template.views.root.RootViewMvcImpl;
+import com.techyourchance.www.android_mvc_template.screens.smsall.controllers.SmsAllFragment;
+import com.techyourchance.www.android_mvc_template.screens.common.mvcviews.RootViewMvcImpl;
 
 
 public class MainActivity extends Activity implements BaseFragment.AbstractFragmentCallback {
@@ -36,7 +35,7 @@ public class MainActivity extends Activity implements BaseFragment.AbstractFragm
 
         // Show the default fragment if the application is not restored
         if (savedInstanceState == null) {
-            replaceFragment(HomeFragment.class, false, null);
+            replaceFragment(SmsAllFragment.class, false, null);
         }
     }
 

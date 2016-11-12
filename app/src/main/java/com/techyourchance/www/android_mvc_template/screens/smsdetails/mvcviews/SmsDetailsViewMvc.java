@@ -1,7 +1,7 @@
-package com.techyourchance.www.android_mvc_template.views.smsdetails;
+package com.techyourchance.www.android_mvc_template.screens.smsdetails.mvcviews;
 
 import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
-import com.techyourchance.www.android_mvc_template.views.ViewMvc;
+import com.techyourchance.www.android_mvc_template.screens.common.mvcviews.ViewMvc;
 
 /**
  * This interface corresponds to "details" screen of the app, where details of a single SMS

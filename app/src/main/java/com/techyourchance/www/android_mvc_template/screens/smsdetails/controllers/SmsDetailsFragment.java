@@ -1,4 +1,4 @@
-package com.techyourchance.www.android_mvc_template.controllers.fragments;
+package com.techyourchance.www.android_mvc_template.screens.smsdetails.controllers;
 
 import android.app.LoaderManager;
 import android.content.ContentUris;
@@ -15,9 +15,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.techyourchance.www.android_mvc_template.screens.common.controllers.BaseFragment;
 import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
-import com.techyourchance.www.android_mvc_template.views.smsdetails.SmsDetailsViewMvc;
-import com.techyourchance.www.android_mvc_template.views.smsdetails.SmsDetailsViewMvcImpl;
+import com.techyourchance.www.android_mvc_template.screens.smsdetails.mvcviews.SmsDetailsViewMvc;
+import com.techyourchance.www.android_mvc_template.screens.smsdetails.mvcviews.SmsDetailsViewMvcImpl;
 
 
 /**

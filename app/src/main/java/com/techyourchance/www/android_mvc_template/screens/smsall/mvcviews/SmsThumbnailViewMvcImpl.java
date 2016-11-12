@@ -1,4 +1,4 @@
-package com.techyourchance.www.android_mvc_template.views.smsthumbnail;
+package com.techyourchance.www.android_mvc_template.screens.smsall.mvcviews;
 
 import android.content.Context;
 import android.os.Bundle;

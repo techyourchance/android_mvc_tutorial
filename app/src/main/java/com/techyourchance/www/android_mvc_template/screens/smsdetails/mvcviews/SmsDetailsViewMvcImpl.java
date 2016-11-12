@@ -1,4 +1,4 @@
-package com.techyourchance.www.android_mvc_template.views.smsdetails;
+package com.techyourchance.www.android_mvc_template.screens.smsdetails.mvcviews;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

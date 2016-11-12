@@ -1,4 +1,4 @@
-package com.techyourchance.www.android_mvc_template.views;
+package com.techyourchance.www.android_mvc_template.screens.common.mvcviews;
 
 import android.os.Bundle;
 import android.view.View;

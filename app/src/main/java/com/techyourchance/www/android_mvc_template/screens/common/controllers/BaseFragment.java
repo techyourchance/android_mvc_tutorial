@@ -1,4 +1,4 @@
-package com.techyourchance.www.android_mvc_template.controllers.fragments;
+package com.techyourchance.www.android_mvc_template.screens.common.controllers;
 
 import android.app.Activity;
 import android.app.Fragment;

@@ -1,4 +1,4 @@
-package com.techyourchance.www.android_mvc_template.views.home;
+package com.techyourchance.www.android_mvc_template.screens.smsall.mvcviews;
 
 import android.database.Cursor;
 import android.os.Bundle;
@@ -9,30 +9,31 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.techyourchance.www.android_mvc_template.R;
+import com.techyourchance.www.android_mvc_template.screens.smsall.listadapters.ListSmsAdapter;
 
 /**
  * This MVC view contains a list view and intercepts click events
  */
-public class HomeViewMvcImpl implements HomeViewMvc {
+public class SmsAllViewMvcImpl implements SmsAllViewMvc {
 
 
     private View mRootView;
 
     private ListView mListView;
-    private HomeListAdapter mHomeListAdapter;
+    private ListSmsAdapter mListSmsAdapter;
 
-    private HomeViewMvcListener mListener;
+    private ListSmsViewMvcListener mListener;
 
-    public HomeViewMvcImpl(LayoutInflater inflater, ViewGroup container) {
+    public SmsAllViewMvcImpl(LayoutInflater inflater, ViewGroup container) {
         mRootView = inflater.inflate(R.layout.mvc_view_home, container, false);
 
         /*
          Note that we are passing null instead of a Cursor - the actual Cursor with the
          results will be passed to this adapter through public "bind" method of this MVC view
           */
-        mHomeListAdapter = new HomeListAdapter(mRootView.getContext(), null, 0);
+        mListSmsAdapter = new ListSmsAdapter(mRootView.getContext(), null, 0);
         mListView = (ListView) mRootView.findViewById(R.id.list_sms_messages);
-        mListView.setAdapter(mHomeListAdapter);
+        mListView.setAdapter(mListSmsAdapter);
 
 
         // Register a listener for ListView's items
@@ -49,7 +50,7 @@ public class HomeViewMvcImpl implements HomeViewMvc {
     }
 
     @Override
-    public void setListener(HomeViewMvcListener listener) {
+    public void setListener(ListSmsViewMvcListener listener) {
         mListener = listener;
     }
 
@@ -65,6 +66,6 @@ public class HomeViewMvcImpl implements HomeViewMvc {
 
     @Override
     public void swapCursor(Cursor cursor) {
-        mHomeListAdapter.swapCursor(cursor);
+        mListSmsAdapter.swapCursor(cursor);
     }
 }
