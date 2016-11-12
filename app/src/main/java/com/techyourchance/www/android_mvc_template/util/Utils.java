@@ -1,4 +1,4 @@
-package com.techyourchance.www.android_mvc_template;
+package com.techyourchance.www.android_mvc_template.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

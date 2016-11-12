@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.techyourchance.www.android_mvc_template.MvcTutorialApplication;
 import com.techyourchance.www.android_mvc_template.managers.SmsMessagesManager;
 import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
 import com.techyourchance.www.android_mvc_template.screens.common.controllers.BaseFragment;
@@ -30,7 +31,10 @@ public class SmsAllAllFragment extends BaseFragment implements
                              Bundle savedInstanceState) {
 
         // in general, better use dependency injection library (e.g. Dagger 2) for members' init
-        mSmsMessagesManager = new SmsMessagesManager(getActivity().getContentResolver());
+        mSmsMessagesManager = new SmsMessagesManager(
+                getActivity().getContentResolver(),
+                getMainThreadPoster(),
+                getBackgroundThreadPoster());
 
         // Instantiate MVC view and set the fragment as listener
         mViewMVC = new SmsAllViewMvcImpl(inflater, container);

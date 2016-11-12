@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 
+import com.techyourchance.www.android_mvc_template.MvcTutorialApplication;
+import com.techyourchance.www.android_mvc_template.util.BackgroundThreadPoster;
+import com.techyourchance.www.android_mvc_template.util.MainThreadPoster;
+
 /**
  * This abstract class contains convenience logic which is common to all fragments in the app.
  */
@@ -54,6 +58,15 @@ public abstract class BaseFragment extends Fragment {
         void replaceFragment(Class<? extends Fragment> claz, boolean addToBackStack,
                                     Bundle args);
 
+    }
+
+    protected MainThreadPoster getMainThreadPoster() {
+        return ((MvcTutorialApplication)getActivity().getApplication()).getMainThreadPoster();
+    }
+
+
+    protected BackgroundThreadPoster getBackgroundThreadPoster() {
+        return ((MvcTutorialApplication)getActivity().getApplication()).getBackgroundThreadPoster();
     }
 
 }

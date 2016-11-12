@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.net.Uri;
 
 import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
+import com.techyourchance.www.android_mvc_template.util.BackgroundThreadPoster;
+import com.techyourchance.www.android_mvc_template.util.MainThreadPoster;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,6 +53,9 @@ public class SmsMessagesManager {
 
 
     private ContentResolver mContentResolver;
+    private final MainThreadPoster mMainThreadPoster;
+    private final BackgroundThreadPoster mBackgroundThreadPoster;
+
 
     // making the set of listeners thread-safe in order to support registration/unregistration from
     // threads other than UI
@@ -58,47 +63,65 @@ public class SmsMessagesManager {
             new ConcurrentHashMap<SmsMessagesManagerListener, Boolean>(1));
 
 
-    public SmsMessagesManager(ContentResolver contentResolver) {
+    public SmsMessagesManager(ContentResolver contentResolver,
+                              MainThreadPoster mainThreadPoster,
+                              BackgroundThreadPoster backgroundThreadPoster) {
         mContentResolver = contentResolver;
+        mMainThreadPoster = mainThreadPoster;
+        mBackgroundThreadPoster = backgroundThreadPoster;
     }
 
-    // TODO: add javadoc
-    public void fetchSmsMessageById(long id) {
-        // TODO: execute query on BG thread!!!!
+    /**
+     * Fetch an SMS message by its ID. Fetch will be done on background thread and registered
+     * listeners will be notified of result on UI thread.
+     * @param id ID of message to fetch
+     */
+    public void fetchSmsMessageById(final long id) {
+        mBackgroundThreadPoster.post(new Runnable() {
+            @Override
+            public void run() {
+                Cursor cursor = mContentResolver.query(
+                        ContentUris.withAppendedId(Uri.parse(CONTENT_URI), id),
+                        COLUMNS_OF_INTEREST,
+                        null,
+                        null,
+                        DEFAULT_SORT_ORDER
+                );
 
-        Cursor cursor = mContentResolver.query(
-                ContentUris.withAppendedId(Uri.parse(CONTENT_URI), id),
-                COLUMNS_OF_INTEREST,
-                null,
-                null,
-                DEFAULT_SORT_ORDER
-        );
+                List<SmsMessage> result = extractSmsMessagesFromCursor(cursor);
 
-        List<SmsMessage> result = extractSmsMessagesFromCursor(cursor);
+                if (cursor != null) cursor.close();
 
-        if (cursor != null) cursor.close();
-
-        notifySmsMessagesFetched(result);
+                notifySmsMessagesFetched(result);
+            }
+        });
     }
 
 
-    // TODO: add javadoc
+    /**
+     * Fetch all SMS messages. Fetch will be done on background thread and registered
+     * listeners will be notified of result on UI thread.
+     */
     public void fetchAllSmsMessages() {
-        // TODO: execute query on BG thread!!!!
+        mBackgroundThreadPoster.post(new Runnable() {
+            @Override
+            public void run() {
 
-        Cursor cursor = mContentResolver.query(
-                Uri.parse(CONTENT_URI),
-                COLUMNS_OF_INTEREST,
-                null,
-                null,
-                DEFAULT_SORT_ORDER
-        );
+                Cursor cursor = mContentResolver.query(
+                        Uri.parse(CONTENT_URI),
+                        COLUMNS_OF_INTEREST,
+                        null,
+                        null,
+                        DEFAULT_SORT_ORDER
+                );
 
-        List<SmsMessage> result = extractSmsMessagesFromCursor(cursor);
+                List<SmsMessage> result = extractSmsMessagesFromCursor(cursor);
 
-        if (cursor != null) cursor.close();
+                if (cursor != null) cursor.close();
 
-        notifySmsMessagesFetched(result);
+                notifySmsMessagesFetched(result);
+            }
+        });
     }
 
     private List<SmsMessage> extractSmsMessagesFromCursor(Cursor cursor) {
@@ -127,10 +150,15 @@ public class SmsMessagesManager {
         if (listener != null) mListeners.remove(listener);
     }
 
-    private void notifySmsMessagesFetched(List<SmsMessage> smsMessages) {
-        for (SmsMessagesManagerListener listener : mListeners) {
-            listener.onSmsMessagesFetched(smsMessages);
-        }
+    private void notifySmsMessagesFetched(final List<SmsMessage> smsMessages) {
+        mMainThreadPoster.post(new Runnable() {
+            @Override
+            public void run() {
+                for (SmsMessagesManagerListener listener : mListeners) {
+                    listener.onSmsMessagesFetched(smsMessages);
+                }
+            }
+        });
     }
 
 }

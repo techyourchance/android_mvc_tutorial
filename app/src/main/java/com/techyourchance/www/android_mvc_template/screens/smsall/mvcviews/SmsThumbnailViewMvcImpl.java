@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.techyourchance.www.android_mvc_template.R;
-import com.techyourchance.www.android_mvc_template.Utils;
+import com.techyourchance.www.android_mvc_template.util.Utils;
 import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
 
 /**
