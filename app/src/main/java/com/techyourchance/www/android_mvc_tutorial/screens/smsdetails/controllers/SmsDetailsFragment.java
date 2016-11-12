@@ -90,7 +90,7 @@ public class SmsDetailsFragment extends BaseFragment implements
     @Override
     public void onStop() {
         super.onStop();
-        mSmsMessagesManager.registerListener(this);
+        mSmsMessagesManager.unregisterListener(this);
     }
 
     @Override
