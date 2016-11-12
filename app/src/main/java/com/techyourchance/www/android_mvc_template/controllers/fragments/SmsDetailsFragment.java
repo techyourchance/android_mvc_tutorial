@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.techyourchance.www.android_mvc_template.R;
 import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
 import com.techyourchance.www.android_mvc_template.views.smsdetails.SmsDetailsViewMvc;
 import com.techyourchance.www.android_mvc_template.views.smsdetails.SmsDetailsViewMvcImpl;
@@ -24,7 +23,7 @@ import com.techyourchance.www.android_mvc_template.views.smsdetails.SmsDetailsVi
 /**
  * This fragment is used to show the details of a SMS message and mark it as read
  */
-public class SmsDetailsFragment extends AbstractFragment implements
+public class SmsDetailsFragment extends BaseFragment implements
         LoaderManager.LoaderCallbacks<Cursor>, SmsDetailsViewMvc.ShowDetailsViewMvcListener {
 
     private static final String TAG = "SmsDetailsFragment";

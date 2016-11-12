@@ -17,7 +17,7 @@ import com.techyourchance.www.android_mvc_template.views.home.HomeViewMvcImpl;
 /**
  * A Fragment containing a list of SMS messages
  */
-public class HomeFragment extends AbstractFragment implements
+public class HomeFragment extends BaseFragment implements
         LoaderManager.LoaderCallbacks<Cursor>, HomeViewMvc.HomeViewMvcListener {
 
     private static final String TAG = "HomeFragment";

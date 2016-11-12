@@ -5,12 +5,12 @@ import android.app.Fragment;
 import android.os.Bundle;
 
 /**
- * This class contains some convenience logic which is common to all fragments in the app.
+ * This abstract class contains convenience logic which is common to all fragments in the app.
  */
-public class AbstractFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
 
 
-    AbstractFragmentCallback mCallback;
+    private AbstractFragmentCallback mCallback;
 
 
     @Override
@@ -51,7 +51,7 @@ public class AbstractFragment extends Fragment {
          * @param addToBackStack whether the old fragment should be added to the back stack
          * @param args           arguments to be set for the new fragment
          */
-        public void replaceFragment(Class<? extends Fragment> claz, boolean addToBackStack,
+        void replaceFragment(Class<? extends Fragment> claz, boolean addToBackStack,
                                     Bundle args);
 
     }

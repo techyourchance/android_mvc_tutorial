@@ -6,12 +6,12 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.techyourchance.www.android_mvc_template.R;
-import com.techyourchance.www.android_mvc_template.controllers.fragments.AbstractFragment;
+import com.techyourchance.www.android_mvc_template.controllers.fragments.BaseFragment;
 import com.techyourchance.www.android_mvc_template.controllers.fragments.HomeFragment;
 import com.techyourchance.www.android_mvc_template.views.root.RootViewMvcImpl;
 
 
-public class MainActivity extends Activity implements AbstractFragment.AbstractFragmentCallback {
+public class MainActivity extends Activity implements BaseFragment.AbstractFragmentCallback {
 
     RootViewMvcImpl mViewMVC;
 
@@ -51,12 +51,6 @@ public class MainActivity extends Activity implements AbstractFragment.AbstractF
     public void replaceFragment(Class<? extends Fragment> claz, boolean addToBackStack,
                                 Bundle args) {
 
-
-        // If the required fragment is already shown - do nothing
-        if (isFragmentShown(claz)) {
-            return;
-        }
-
         FragmentTransaction ft = getFragmentManager().beginTransaction();
 
 
@@ -84,19 +78,6 @@ public class MainActivity extends Activity implements AbstractFragment.AbstractF
         ft.commit();
 
     }
-
-    /**
-     * Check whether a fragment of a specific class is currently shown
-     * @param claz class of fragment to test. Null considered as "test no fragment shown"
-     * @return true if fragment of the same class (or a superclass) is currently shown
-     */
-    private boolean isFragmentShown(Class<? extends Fragment> claz) {
-        Fragment currFragment = getFragmentManager().findFragmentById(R.id.frame_contents);
-
-        return (currFragment == null && claz == null) ||
-                (currFragment != null && claz.isInstance(currFragment));
-    }
-
     // End of fragments management
     //
     // ---------------------------------------------------------------------------------------------
