@@ -40,12 +40,12 @@ public class SmsThumbnailViewMvcImpl implements SmsThumbnailViewMvc {
     }
 
     @Override
-    public void showSmsThumbnail(SmsMessage smsMessage) {
-        mTxtAddress.setText(smsMessage.mAddress);
-        mTxtDate.setText(Utils.convertToHumanReadableDate(smsMessage.mDate));
+    public void bindSmsMessage(SmsMessage smsMessage) {
+        mTxtAddress.setText(smsMessage.getAddress());
+        mTxtDate.setText(Utils.convertToHumanReadableDate(smsMessage.getDate()));
 
         // Change the background depending on whether the message has already been read
-        if (smsMessage.mUnread) {
+        if (smsMessage.isUnread()) {
             mRootView.setBackgroundColor(
                     context.getResources().getColor(android.R.color.holo_green_light));
         } else {

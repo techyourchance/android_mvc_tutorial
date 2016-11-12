@@ -6,7 +6,7 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.techyourchance.www.android_mvc_template.R;
-import com.techyourchance.www.android_mvc_template.screens.smsall.controllers.SmsAllFragment;
+import com.techyourchance.www.android_mvc_template.screens.smsall.controllers.SmsAllAllFragment;
 import com.techyourchance.www.android_mvc_template.screens.common.mvcviews.RootViewMvcImpl;
 
 
@@ -35,7 +35,7 @@ public class MainActivity extends Activity implements BaseFragment.AbstractFragm
 
         // Show the default fragment if the application is not restored
         if (savedInstanceState == null) {
-            replaceFragment(SmsAllFragment.class, false, null);
+            replaceFragment(SmsAllAllFragment.class, false, null);
         }
     }
 

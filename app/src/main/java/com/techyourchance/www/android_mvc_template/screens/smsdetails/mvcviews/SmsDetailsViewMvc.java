@@ -10,34 +10,29 @@ import com.techyourchance.www.android_mvc_template.screens.common.mvcviews.ViewM
 public interface SmsDetailsViewMvc extends ViewMvc {
 
 
-    public interface ShowDetailsViewMvcListener {
+    interface ShowDetailsViewMvcListener {
         /**
          * This callback will be invoked when "mark as read" button is being clicked
          */
-        public void onMarkAsReadClick();
+        void onMarkAsReadClick();
     }
 
     /**
      * Hide "mark as read" button
      */
-    void hideMarkAsReadButton();
-
-    /**
-     * Show "mark as read" button
-     */
-    void showMarkAsReadButton();
+    void markAsReadNotSupported();
 
     /**
      * Show details of a particular SMS message
      * @param smsMessage a message to show
      */
-    void showSmsDetails(SmsMessage smsMessage);
+    void bindSmsDetails(SmsMessage smsMessage);
 
 
     /**
      * Set a listener that will be notified by this MVC view
      * @param listener listener that should be notified; null to clear
      */
-    public void setListener(ShowDetailsViewMvcListener listener);
+    void setListener(ShowDetailsViewMvcListener listener);
 
 }

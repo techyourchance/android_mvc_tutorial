@@ -13,5 +13,5 @@ public interface SmsThumbnailViewMvc extends ViewMvc {
      * Show thumbnail of a particular SMS message
      * @param smsMessage the message to show
      */
-    void showSmsThumbnail(SmsMessage smsMessage);
+    void bindSmsMessage(SmsMessage smsMessage);
 }

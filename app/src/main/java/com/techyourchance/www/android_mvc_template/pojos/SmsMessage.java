@@ -1,53 +1,41 @@
 package com.techyourchance.www.android_mvc_template.pojos;
 
-import android.database.Cursor;
-
 /**
  * Instances of this class are POJOs (Plain Old Java Object) which represent SMS messages.
  */
 public class SmsMessage {
 
-    private static final String TAG = "SmsMessage";
+    private long mId;
+    private String mAddress;
+    private String mBody;
+    private String mDate;
+    private boolean mUnread;
 
-    public String mAddress;
-    public String mBody;
-    public String mDate;
-    public boolean mUnread;
-
-    /**
-     * Private constructor - object of this class should be instantiated using
-     * the static "factory method" provided below
-     */
-    private SmsMessage() {}
-
-
-    /**
-     * Factory method that constructs SmsMessage object from the values stored in Cursor at the
-     * current position.
-     * @throws IllegalArgumentException if any of the required fields are missing from Cursor.
-     * Required fields: "address", "body", "date", "read".
-     */
-    public static SmsMessage createSmsMessage(Cursor cursor) throws IllegalArgumentException {
-        SmsMessage smsMessage = new SmsMessage();
-
-        try {
-            smsMessage.mAddress = cursor.getString(
-                    cursor.getColumnIndexOrThrow("address"));
-
-            smsMessage.mBody = cursor.getString(
-                    cursor.getColumnIndexOrThrow("body"));
-
-            smsMessage.mDate = cursor.getString(
-                    cursor.getColumnIndexOrThrow("date"));
-
-            smsMessage.mUnread = cursor.getInt(cursor.getColumnIndexOrThrow("read")) == 0;
-
-        } catch (Exception e) {
-            throw new IllegalArgumentException(e);
-        }
-
-        return smsMessage;
+    public SmsMessage(long id, String address, String body, String date, boolean unread) {
+        mId = id;
+        mAddress = address;
+        mBody = body;
+        mDate = date;
+        mUnread = unread;
     }
 
+    public long getId() {
+        return mId;
+    }
 
+    public String getAddress() {
+        return mAddress;
+    }
+
+    public String getBody() {
+        return mBody;
+    }
+
+    public String getDate() {
+        return mDate;
+    }
+
+    public boolean isUnread() {
+        return mUnread;
+    }
 }

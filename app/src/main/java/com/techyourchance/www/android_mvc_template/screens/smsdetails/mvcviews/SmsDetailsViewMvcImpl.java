@@ -16,13 +16,14 @@ import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
 public class SmsDetailsViewMvcImpl implements SmsDetailsViewMvc {
 
 
-    View mRootView;
-    ShowDetailsViewMvcListener mListener;
+    private View mRootView;
+    private ShowDetailsViewMvcListener mListener;
+    private boolean mMarkAsReadSupported = true;
 
-    TextView mTxtAddress;
-    TextView mTxtDate;
-    TextView mTxtBody;
-    Button mBtnMarkAsRead;
+    private TextView mTxtAddress;
+    private TextView mTxtDate;
+    private TextView mTxtBody;
+    private Button mBtnMarkAsRead;
 
     public SmsDetailsViewMvcImpl(LayoutInflater inflater, ViewGroup container) {
         mRootView = inflater.inflate(R.layout.mvc_view_sms_details, container, false);
@@ -48,28 +49,25 @@ public class SmsDetailsViewMvcImpl implements SmsDetailsViewMvc {
     }
 
     @Override
-    public void hideMarkAsReadButton() {
-        mBtnMarkAsRead.setVisibility(View.GONE);
+    public void markAsReadNotSupported() {
+        mMarkAsReadSupported = false;
     }
 
-    @Override
-    public void showMarkAsReadButton() {
-        mBtnMarkAsRead.setVisibility(View.VISIBLE);
-    }
 
     @Override
-    public void showSmsDetails(SmsMessage smsMessage) {
-        mTxtAddress.setText(smsMessage.mAddress);
-        mTxtDate.setText(smsMessage.mDate);
-        mTxtBody.setText(smsMessage.mBody);
+    public void bindSmsDetails(SmsMessage smsMessage) {
+        mTxtAddress.setText(smsMessage.getAddress());
+        mTxtDate.setText(smsMessage.getDate());
+        mTxtBody.setText(smsMessage.getBody());
 
-        if (smsMessage.mUnread) {
-            mRootView.setBackgroundColor(mRootView.getResources().getColor(android.R.color.holo_green_light));
-            mBtnMarkAsRead.setVisibility(View.VISIBLE);
-        } else {
-            mRootView.setBackgroundColor(mRootView.getResources().getColor(android.R.color.white));
-            mBtnMarkAsRead.setVisibility(View.GONE);
-        }
+
+        mRootView.setBackgroundColor(smsMessage.isUnread() ?
+                mRootView.getResources().getColor(android.R.color.holo_green_light) :
+                mRootView.getResources().getColor(android.R.color.white));
+
+        mBtnMarkAsRead.setVisibility(smsMessage.isUnread() && mMarkAsReadSupported ?
+                View.VISIBLE : View.GONE);
+
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.techyourchance.www.android_mvc_template.screens.smsall.mvcviews;
 
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +8,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.techyourchance.www.android_mvc_template.R;
-import com.techyourchance.www.android_mvc_template.screens.smsall.listadapters.ListSmsAdapter;
+import com.techyourchance.www.android_mvc_template.pojos.SmsMessage;
+import com.techyourchance.www.android_mvc_template.screens.smsall.listadapters.SmsAllListAdapter;
+
+import java.util.List;
 
 /**
  * This MVC view contains a list view and intercepts click events
@@ -20,9 +22,9 @@ public class SmsAllViewMvcImpl implements SmsAllViewMvc {
     private View mRootView;
 
     private ListView mListView;
-    private ListSmsAdapter mListSmsAdapter;
+    private SmsAllListAdapter mSmsAllListAdapter;
 
-    private ListSmsViewMvcListener mListener;
+    private SmsAllViewMvcListener mListener;
 
     public SmsAllViewMvcImpl(LayoutInflater inflater, ViewGroup container) {
         mRootView = inflater.inflate(R.layout.mvc_view_home, container, false);
@@ -31,9 +33,9 @@ public class SmsAllViewMvcImpl implements SmsAllViewMvc {
          Note that we are passing null instead of a Cursor - the actual Cursor with the
          results will be passed to this adapter through public "bind" method of this MVC view
           */
-        mListSmsAdapter = new ListSmsAdapter(mRootView.getContext(), null, 0);
+        mSmsAllListAdapter = new SmsAllListAdapter(inflater.getContext(), 0);
         mListView = (ListView) mRootView.findViewById(R.id.list_sms_messages);
-        mListView.setAdapter(mListSmsAdapter);
+        mListView.setAdapter(mSmsAllListAdapter);
 
 
         // Register a listener for ListView's items
@@ -42,7 +44,7 @@ public class SmsAllViewMvcImpl implements SmsAllViewMvc {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 if (mListener != null) {
-                    mListener.onListItemClick(position, id);
+                    mListener.onSmsMessageClicked(mSmsAllListAdapter.getItem(position).getId());
                 }
             }
 
@@ -50,7 +52,7 @@ public class SmsAllViewMvcImpl implements SmsAllViewMvc {
     }
 
     @Override
-    public void setListener(ListSmsViewMvcListener listener) {
+    public void setListener(SmsAllViewMvcListener listener) {
         mListener = listener;
     }
 
@@ -65,7 +67,9 @@ public class SmsAllViewMvcImpl implements SmsAllViewMvc {
     }
 
     @Override
-    public void swapCursor(Cursor cursor) {
-        mListSmsAdapter.swapCursor(cursor);
+    public void bindSmsMessages(List<SmsMessage> smsMessages) {
+        mSmsAllListAdapter.clear();
+        mSmsAllListAdapter.addAll(smsMessages);
+        mSmsAllListAdapter.notifyDataSetChanged();
     }
 }
