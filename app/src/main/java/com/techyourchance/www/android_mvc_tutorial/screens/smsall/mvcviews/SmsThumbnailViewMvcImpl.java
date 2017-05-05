@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.techyourchance.www.android_mvc_tutorial.R;
-import com.techyourchance.www.android_mvc_tutorial.util.Utils;
-import com.techyourchance.www.android_mvc_tutorial.pojos.SmsMessage;
+import com.techyourchance.www.android_mvc_tutorial.common.Utils;
+import com.techyourchance.www.android_mvc_tutorial.sms.SmsMessage;
 
 /**
  * This MVC view represents a single element in ListView.

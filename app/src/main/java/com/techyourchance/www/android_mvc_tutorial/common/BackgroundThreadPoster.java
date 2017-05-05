@@ -1,4 +1,4 @@
-package com.techyourchance.www.android_mvc_tutorial.util;
+package com.techyourchance.www.android_mvc_tutorial.common;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

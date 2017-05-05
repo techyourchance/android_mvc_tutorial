@@ -1,4 +1,4 @@
-package com.techyourchance.www.android_mvc_tutorial.pojos;
+package com.techyourchance.www.android_mvc_tutorial.sms;
 
 /**
  * Instances of this class are POJOs (Plain Old Java Object) which represent SMS messages.

@@ -2,8 +2,8 @@ package com.techyourchance.www.android_mvc_tutorial;
 
 import android.app.Application;
 
-import com.techyourchance.www.android_mvc_tutorial.util.BackgroundThreadPoster;
-import com.techyourchance.www.android_mvc_tutorial.util.MainThreadPoster;
+import com.techyourchance.www.android_mvc_tutorial.common.BackgroundThreadPoster;
+import com.techyourchance.www.android_mvc_tutorial.common.MainThreadPoster;
 
 /**
  * Our custom {@link Application}

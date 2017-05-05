@@ -5,8 +5,8 @@ import android.app.Fragment;
 import android.os.Bundle;
 
 import com.techyourchance.www.android_mvc_tutorial.MvcTutorialApplication;
-import com.techyourchance.www.android_mvc_tutorial.util.BackgroundThreadPoster;
-import com.techyourchance.www.android_mvc_tutorial.util.MainThreadPoster;
+import com.techyourchance.www.android_mvc_tutorial.common.BackgroundThreadPoster;
+import com.techyourchance.www.android_mvc_tutorial.common.MainThreadPoster;
 
 /**
  * This abstract class contains convenience logic which is common to all fragments in the app.

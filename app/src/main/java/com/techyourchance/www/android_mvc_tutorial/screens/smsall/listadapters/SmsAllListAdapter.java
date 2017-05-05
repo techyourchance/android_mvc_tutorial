@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import com.techyourchance.www.android_mvc_tutorial.pojos.SmsMessage;
+import com.techyourchance.www.android_mvc_tutorial.sms.SmsMessage;
 import com.techyourchance.www.android_mvc_tutorial.screens.smsall.mvcviews.SmsThumbnailViewMvc;
 import com.techyourchance.www.android_mvc_tutorial.screens.smsall.mvcviews.SmsThumbnailViewMvcImpl;
 

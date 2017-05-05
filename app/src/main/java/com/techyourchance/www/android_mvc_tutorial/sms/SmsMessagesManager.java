@@ -1,4 +1,4 @@
-package com.techyourchance.www.android_mvc_tutorial.managers;
+package com.techyourchance.www.android_mvc_tutorial.sms;
 
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -6,20 +6,17 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 
-import com.techyourchance.www.android_mvc_tutorial.pojos.SmsMessage;
-import com.techyourchance.www.android_mvc_tutorial.util.BackgroundThreadPoster;
-import com.techyourchance.www.android_mvc_tutorial.util.MainThreadPoster;
+import com.techyourchance.www.android_mvc_tutorial.common.BackgroundThreadPoster;
+import com.techyourchance.www.android_mvc_tutorial.common.BaseObservableManager;
+import com.techyourchance.www.android_mvc_tutorial.common.MainThreadPoster;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This class encapsulates the logic related to SMS messages, including interactions with MVC model.
  */
-public class SmsMessagesManager {
+public class SmsMessagesManager extends BaseObservableManager<SmsMessagesManager.SmsMessagesManagerListener> {
 
     /*
      * MVC model of the app is a database of SMS messages stored on the device. The model is accessed
@@ -57,13 +54,6 @@ public class SmsMessagesManager {
     private ContentResolver mContentResolver;
     private final MainThreadPoster mMainThreadPoster;
     private final BackgroundThreadPoster mBackgroundThreadPoster;
-
-
-    // making the set of listeners thread-safe in order to support registration/unregistration from
-    // threads other than UI
-    private Set<SmsMessagesManagerListener> mListeners = Collections.newSetFromMap(
-            new ConcurrentHashMap<SmsMessagesManagerListener, Boolean>(1));
-
 
     public SmsMessagesManager(ContentResolver contentResolver,
                               MainThreadPoster mainThreadPoster,
@@ -165,19 +155,11 @@ public class SmsMessagesManager {
 
     }
 
-    public void registerListener(SmsMessagesManagerListener listener) {
-        if (listener != null) mListeners.add(listener);
-    }
-
-    public void unregisterListener(SmsMessagesManagerListener listener) {
-        if (listener != null) mListeners.remove(listener);
-    }
-
     private void notifySmsMessagesFetched(final List<SmsMessage> smsMessages) {
         mMainThreadPoster.post(new Runnable() {
             @Override
             public void run() {
-                for (SmsMessagesManagerListener listener : mListeners) {
+                for (SmsMessagesManagerListener listener : getListeners()) {
                     listener.onSmsMessagesFetched(smsMessages);
                 }
             }

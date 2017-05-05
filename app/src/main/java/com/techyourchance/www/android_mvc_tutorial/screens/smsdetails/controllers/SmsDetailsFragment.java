@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.techyourchance.www.android_mvc_tutorial.managers.SmsMessagesManager;
-import com.techyourchance.www.android_mvc_tutorial.pojos.SmsMessage;
+import com.techyourchance.www.android_mvc_tutorial.sms.SmsMessagesManager;
+import com.techyourchance.www.android_mvc_tutorial.sms.SmsMessage;
 import com.techyourchance.www.android_mvc_tutorial.screens.common.controllers.BaseFragment;
 import com.techyourchance.www.android_mvc_tutorial.screens.smsdetails.mvcviews.SmsDetailsViewMvc;
 import com.techyourchance.www.android_mvc_tutorial.screens.smsdetails.mvcviews.SmsDetailsViewMvcImpl;

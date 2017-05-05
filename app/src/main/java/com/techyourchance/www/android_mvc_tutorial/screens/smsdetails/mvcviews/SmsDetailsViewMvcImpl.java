@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.techyourchance.www.android_mvc_tutorial.R;
-import com.techyourchance.www.android_mvc_tutorial.pojos.SmsMessage;
+import com.techyourchance.www.android_mvc_tutorial.sms.SmsMessage;
 
 /**
  * An implementation of {@link SmsDetailsViewMvc} interface

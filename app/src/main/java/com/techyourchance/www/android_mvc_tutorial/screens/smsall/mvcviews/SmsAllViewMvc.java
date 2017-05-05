@@ -1,6 +1,6 @@
 package com.techyourchance.www.android_mvc_tutorial.screens.smsall.mvcviews;
 
-import com.techyourchance.www.android_mvc_tutorial.pojos.SmsMessage;
+import com.techyourchance.www.android_mvc_tutorial.sms.SmsMessage;
 import com.techyourchance.www.android_mvc_tutorial.screens.common.mvcviews.ViewMvc;
 
 import java.util.List;
