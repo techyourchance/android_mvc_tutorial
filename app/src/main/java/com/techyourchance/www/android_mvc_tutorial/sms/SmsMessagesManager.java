@@ -72,19 +72,21 @@ public class SmsMessagesManager extends BaseObservableManager<SmsMessagesManager
         mBackgroundThreadPoster.post(new Runnable() {
             @Override
             public void run() {
-                Cursor cursor = mContentResolver.query(
-                        ContentUris.withAppendedId(Uri.parse(CONTENT_URI), id),
-                        COLUMNS_OF_INTEREST,
-                        null,
-                        null,
-                        DEFAULT_SORT_ORDER
-                );
+                Cursor cursor = null;
+                try {
+                    cursor = mContentResolver.query(
+                            ContentUris.withAppendedId(Uri.parse(CONTENT_URI), id),
+                            COLUMNS_OF_INTEREST,
+                            null,
+                            null,
+                            DEFAULT_SORT_ORDER
+                    );
 
-                List<SmsMessage> result = extractSmsMessagesFromCursor(cursor);
-
-                if (cursor != null) cursor.close();
-
-                notifySmsMessagesFetched(result);
+                    List<SmsMessage> result = extractSmsMessagesFromCursor(cursor);
+                    notifySmsMessagesFetched(result);
+                } finally {
+                    if (cursor != null) cursor.close();
+                }
             }
         });
     }
@@ -98,22 +100,27 @@ public class SmsMessagesManager extends BaseObservableManager<SmsMessagesManager
         mBackgroundThreadPoster.post(new Runnable() {
             @Override
             public void run() {
-
-                Cursor cursor = mContentResolver.query(
-                        Uri.parse(CONTENT_URI),
-                        COLUMNS_OF_INTEREST,
-                        null,
-                        null,
-                        DEFAULT_SORT_ORDER
-                );
-
-                List<SmsMessage> result = extractSmsMessagesFromCursor(cursor);
-
-                if (cursor != null) cursor.close();
-
-                notifySmsMessagesFetched(result);
+                fetchAllSmsMessagesSync();
             }
         });
+    }
+
+    private void fetchAllSmsMessagesSync() {
+        Cursor cursor = null;
+        try {
+            cursor = mContentResolver.query(
+                    Uri.parse(CONTENT_URI),
+                    COLUMNS_OF_INTEREST,
+                    null,
+                    null,
+                    DEFAULT_SORT_ORDER
+            );
+
+            List<SmsMessage> result = extractSmsMessagesFromCursor(cursor);
+            notifySmsMessagesFetched(result);
+        } finally {
+            if (cursor != null) cursor.close();
+        }
     }
 
     private List<SmsMessage> extractSmsMessagesFromCursor(Cursor cursor) {
@@ -150,6 +157,9 @@ public class SmsMessagesManager extends BaseObservableManager<SmsMessagesManager
                         values,
                         null,
                         null);
+
+                // re-fetch all messages and notify listeners
+                fetchAllSmsMessagesSync();
             }
         });
 
