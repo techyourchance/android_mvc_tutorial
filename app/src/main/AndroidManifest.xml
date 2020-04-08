@@ -12,11 +12,10 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.techyourchance.www.android_mvc_tutorial.screens.common.controllers.MainActivity"
+            android:name="com.techyourchance.android_mvc_tutorial.screens.common.controllers.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
