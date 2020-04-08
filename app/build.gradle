@@ -10,15 +10,31 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+
+        vectorDrawables.useSupportLibrary = true
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+
+    // Multithreading
+    implementation 'com.techyourchance.threadposter:threadposter:0.8.3'
+
+    // Fragment navigation
+    implementation 'com.ncapdevi:frag-nav:3.2.0'
 }

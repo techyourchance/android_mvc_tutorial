@@ -31,7 +31,7 @@ public class SmsMessage {
         return mBody;
     }
 
-    public String getDate() {
+    public String getDateString() {
         return mDate;
     }
 

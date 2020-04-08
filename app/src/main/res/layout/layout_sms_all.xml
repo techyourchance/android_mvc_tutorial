@@ -1,0 +1,77 @@
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.techyourchance.android_mvc_tutorial.screens.common.toolbar.MyToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/blue"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/list_sms_messages"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="10.0dp"/>
+
+        <LinearLayout
+            android:id="@+id/view_permission_denied"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textColor="@color/red"
+                android:text="This app needs SMS permission to show a list of SMS"/>
+
+            <Button
+                android:id="@+id/btn_request_permission"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:background="@color/orange"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:text="Grant permission"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/view_permission_denied_dont_ask_again"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textColor="@color/red"
+                android:text="You denied SMS permission and we can't ask anymore. Either grant it manually, or reinstall the app"/>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>
