@@ -1,12 +1,14 @@
-# Android MVC/MVP tutorial
+# Android MVC Tutorial
 
-This simple SMS inbox reader application demonstrates one of the possible approaches to implementation of MVC architectural pattern in Android.
+This simple SMS inbox reader application demonstrates the best implementation of MVC architectural pattern in Android.
 
-You're invited to clone/fork this repository and use it as a template for your own great apps!
-
-# Detailed walkthrough
+# Detailed Walkthrough
 
 I wrote a series of posts about this particular implementation of MVC for Android in a [blog](http://www.techyourchance.com/mvc-and-mvp-architectural-patterns-in-android-part-1/). 
+
+# Professional Course
+
+If you're looking for an architecture for a professional project, or just want to understand the topic of Android architecture at a professional level, check out my [course about Android architecture](https://go.techyourchance.com/android-architecture-course-mvc-github).
 
 # License
 
