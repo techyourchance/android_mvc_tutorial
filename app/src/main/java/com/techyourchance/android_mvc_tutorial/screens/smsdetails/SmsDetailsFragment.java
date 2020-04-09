@@ -2,7 +2,6 @@ package com.techyourchance.android_mvc_tutorial.screens.smsdetails;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Telephony;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +67,7 @@ public class SmsDetailsFragment extends BaseFragment implements
          */
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             if (!mDefaultSmsAppTester.isDefaultSmsApp()) {
-                mViewMVC.markAsReadNotSupported();
+                mViewMVC.hideMarkAsReadButton();
             }
         }
 
@@ -110,7 +109,7 @@ public class SmsDetailsFragment extends BaseFragment implements
     }
 
     @Override
-    public void onMarkAsReadClick() {
+    public void onMarkAsReadClicked() {
         mMarkMessageAsReadUseCase.markSmsAsRead(mSmsId);
     }
 

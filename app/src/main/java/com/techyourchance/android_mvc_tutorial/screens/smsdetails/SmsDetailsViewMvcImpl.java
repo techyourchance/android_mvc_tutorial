@@ -11,19 +11,16 @@ import com.techyourchance.android_mvc_tutorial.screens.common.BaseViewMvc;
 import com.techyourchance.android_mvc_tutorial.screens.common.toolbar.MyToolbar;
 import com.techyourchance.android_mvc_tutorial.sms.SmsMessage;
 
-/**
- * An implementation of {@link SmsDetailsViewMvc} interface
- */
-public class SmsDetailsViewMvcImpl extends BaseViewMvc<SmsDetailsViewMvc.Listener> implements SmsDetailsViewMvc {
-
-    private boolean mMarkAsReadSupported = true;
-
+public class SmsDetailsViewMvcImpl extends BaseViewMvc<SmsDetailsViewMvc.Listener>
+        implements SmsDetailsViewMvc {
 
     private MyToolbar mToolbar;
     private TextView mTxtAddress;
     private TextView mTxtDate;
     private TextView mTxtBody;
     private Button mBtnMarkAsRead;
+
+    private boolean mMarkAsReadSupported = true;
 
     public SmsDetailsViewMvcImpl(LayoutInflater inflater, ViewGroup container) {
         setRootView(inflater.inflate(R.layout.layout_sms_details, container, false));
@@ -40,18 +37,15 @@ public class SmsDetailsViewMvcImpl extends BaseViewMvc<SmsDetailsViewMvc.Listene
             }
         });
 
-        mBtnMarkAsRead.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                for (Listener listener : getListeners()) {
-                    listener.onMarkAsReadClick();
-                }
+        mBtnMarkAsRead.setOnClickListener(view -> {
+            for (Listener listener : getListeners()) {
+                listener.onMarkAsReadClicked();
             }
         });
     }
 
     @Override
-    public void markAsReadNotSupported() {
+    public void hideMarkAsReadButton() {
         mMarkAsReadSupported = false;
     }
 

@@ -11,6 +11,6 @@ public interface ViewMvc {
     /**
      * @return the root Android View which is used internally by this MVC View.
      */
-    public View getRootView();
+    View getRootView();
 
 }

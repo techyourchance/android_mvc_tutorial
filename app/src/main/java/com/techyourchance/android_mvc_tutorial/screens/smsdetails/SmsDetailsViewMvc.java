@@ -6,11 +6,11 @@ import com.techyourchance.android_mvc_tutorial.sms.SmsMessage;
 public interface SmsDetailsViewMvc extends ViewMvc {
 
     interface Listener {
-        void onMarkAsReadClick();
+        void onMarkAsReadClicked();
         void onNavigateUpClicked();
     }
 
-    void markAsReadNotSupported();
+    void hideMarkAsReadButton();
 
     void bindSmsMessage(SmsMessage smsMessage);
 
